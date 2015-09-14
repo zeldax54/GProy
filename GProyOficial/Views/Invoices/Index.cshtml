@@ -1,0 +1,145 @@
+@using System.Linq.Expressions
+@using GProyOficial.Models
+@model IEnumerable<GProyOficial.Models.Invoice>
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+
+}
+@functions
+{
+
+    public int SupState()
+    {
+        GProyEntities db = new GProyEntities();
+        ProjectDetails pd = db.ProjectDetails.Find(ViewBag.iddet);
+        StateCSupplement stateCSupplement = db.StateCSupplement.Where(st => st.supplementId == pd.ProjSup.supplementId && st.state).ToList().First();
+        if (stateCSupplement.stateCId == 6 || stateCSupplement.stateCId == 7)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+
+    <title>@ViewBag.Title</title>
+    <link href="../../Content/assets/global/css/components.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../Content/assets/global/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="../../Content/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+</head>
+<body>
+<p>
+    @if (SupState() == 1)
+    {
+        <label class="label-danger">Esta factura esta en un suplemento Cancelado o Detenido no se pueden ejecutar acciones(Nueva/Editar)</label>
+    }
+    else
+    {
+        <button type="button" class="btn btn-default btn-sm" id="nuevafact">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    }
+   
+</p>
+<input type="text" value="@ViewBag.iddet" id="iddetalle" hidden="">
+<table id="tablefact">
+    <thead>
+    <tr>
+        <th hidden="">
+            IDFACT
+        </th>
+        <th>
+            Monto
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Numero
+        </th>
+        <th>
+            Cliente
+        </th>
+        <th>
+            Producto
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td hidden="" >
+                <span id="idff0">@Html.DisplayFor(modelItem => item.invoiceId)</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+            </td>
+            <td>
+                @item.date.ToShortDateString()
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.InvoiceStateSet.First(a => a.invoiceId == item.invoiceId).description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.invoiceNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.name)
+            </td>
+            <td>
+                <button type="button" class="btn btn-sm" id="editfact001" title="Editar Factura">
+                    <i class="fa fa-edit"></i>
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-sm" id="elimfact001" title="Eliminar Factura">
+                    <i class="fa fa-eraser"></i>
+                </button>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<!--Tablas-->
+<script type="text/javascript" src="../../Content/assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../../Content/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../Content/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<!--Tablas scripts-->
+<script src="../../Content/assets/admin/pages/scripts/table-managed.js"></script>
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/font-awesome/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+
+
+</body>
+</html>

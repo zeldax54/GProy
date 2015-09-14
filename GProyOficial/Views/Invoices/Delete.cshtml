@@ -1,0 +1,121 @@
+@using GProyOficial.Models
+@model GProyOficial.Models.Invoice
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+
+@functions
+{
+
+    public int SupState()
+    {
+        GProyEntities db = new GProyEntities();
+        ProjectDetails pd = db.ProjectDetails.Find(ViewBag.iddet);
+        StateCSupplement stateCSupplement = db.StateCSupplement.Where(st => st.supplementId == pd.ProjSup.supplementId && st.state).ToList().First();
+        if (stateCSupplement.stateCId == 6 || stateCSupplement.stateCId == 7)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+}
+
+<h2>Eliminar factura</h2>
+
+
+<div>
+    <span id="facturaid" hidden="">@Html.DisplayFor(model => model.invoiceId)</span>
+    <h4>Factura</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>Monto</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amount)
+        </dd>
+
+        <dt>
+            Fecha
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            Numero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invoiceNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.name)
+        </dt>
+
+        <dd>
+            Cliente
+        </dd>
+
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.name)
+        </dd>
+
+    </dl>
+
+
+    <table>
+        @foreach (var s in ViewBag.espc)
+        {
+            <tr>
+                <td><input type="text" name="projDetailsSpecialistId" id="projDetailsSpecialistId" value="@s.projDetailsSpecialistId" disabled="" hidden="" /></td>
+                <td>@s.ProjectDetailsSpecialist.ProjSpecialist.Specialist.name</td>
+                <td style="width: 20px"></td>
+                <td><input type="text" value="@s.amount" name="valosfact2" id="valosfact2" disabled="" /></td>
+            </tr>
+        }
+        @foreach (var q in ViewBag.quedan)
+        {
+            <tr>
+                <td><input type="text" name="projDetailsSpecialistId" id="projDetailsSpecialistId" value="@q.projDetailsSpecialistId" disabled="" hidden="" /></td>
+                <td>@q.ProjSpecialist.Specialist.name</td>
+                <td style="width: 20px"></td>
+            
+            </tr>
+        }
+    </table>
+@if (SupState() == 1)
+{
+    <label class="label-danger">No se puede Eliminar esta Factura. Esta en un suplemento Detenido o Cancelado</label>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="button" id="submitDelete" value="Delete" class="btn btn-default" />
+        </div>
+    }
+}
+
+
+    
+</div>

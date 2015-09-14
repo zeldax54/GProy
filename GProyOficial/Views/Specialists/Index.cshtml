@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GProyOficial.Models.Specialist>
+
+@{
+   
+    ViewBag.Title = "Especialistas";
+    
+    
+
+}
+
+<h3>Especialistas</h3>
+
+<p>
+    
+    @Html.ActionLink("Crear", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.ci)-->C.i
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Area.name)-->Area
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ci)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area.name)
+        </td>
+        <td>
+            <!--@Html.ActionLink("Editar", "Edit", new { id=item.specialistId })-->
+            <a href="@Url.Action("Edit", "Specialists", new { id = item.specialistId })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+            <!--@Html.ActionLink("Detalles", "Details", new { id=item.specialistId }) -->
+            <a href="@Url.Action("Details", "Specialists", new { id = item.specialistId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+            <!--@Html.ActionLink("Eliminar", "Delete", new { id=item.specialistId })-->
+            <a href="@Url.Action("Delete", "Specialists", new { id = item.specialistId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+        </td>
+    </tr>
+}
+
+</table>

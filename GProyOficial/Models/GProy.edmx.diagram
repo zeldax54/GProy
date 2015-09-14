@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b5ff0e4edd524cac9d8162eef95a7c5e" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="GProyModel.AccountBank" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Area" Width="1.5" PointX="3.75" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Attached" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Bank" Width="1.5" PointX="6" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Client" Width="1.5" PointX="1.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.ClientSupplement" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Contract" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.CurrencyType" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Entity" Width="1.5" PointX="1.5" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.GlobalService" Width="1.5" PointX="1.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Invoice" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.InvoiceProjectDetails" Width="2.375" PointX="8.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.InvoiceStateSet" Width="1.5" PointX="8.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Menu" Width="1.5" PointX="13.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Organism" Width="1.5" PointX="1.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Product" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Project" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.ProjectDetails" Width="1.5" PointX="13.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.ProjectDetailsSpecialist" Width="2.375" PointX="15.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.ProjectState" Width="1.5" PointX="11.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.ProjSpecialist" Width="1.5" PointX="11.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.ProjSup" Width="1.5" PointX="11.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Rate" Width="1.5" PointX="1.5" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Role" Width="1.5" PointX="13.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Schedule" Width="1.5" PointX="16.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Service" Width="1.5" PointX="0.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Specialist" Width="1.5" PointX="9" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Stage" Width="1.5" PointX="11.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.State" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.StateC" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.StateContract" Width="1.5" PointX="11.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.StateCSupplement" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Supplement" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.SupplementCurrencyType" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.sysdiagrams" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.Temp" Width="1.5" PointX="13.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GProyModel.User" Width="1.5" PointX="16" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="GProyModel.FK_AccountBankClient_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_AccountBankClient_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_AccountBankClient_CurrencyType" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Area_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Project_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_SpecialistNom_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Attached_Supplement" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Client_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Client_Organism" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ClientInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ClientSupplement_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ContractClient" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_SubjectProject" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ClientSupplement_Supplement" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ContractSupplement" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_StateContract_Contract" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_SupplementCurrencyType_CurrencyType" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_EntityOrganism" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Service_GlobalService" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Invoice_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_InvoiceProjectDetails_Invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_InvoiceStateInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_InvoiceProjectDetails_ProjectDetailsSpecialist" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_InvoiceStateState" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Project_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Supplement_ProductNom" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjectState_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjSpecialist_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjSup_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjectDetails_ProjSup" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjectDetails_Stage" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjectDetailsSpecialist_ProjectDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjectDetailsSpecialist_ProjSpecialist" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjectState_State" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjSpecialist_Specialist" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_ProjSup_Supplement" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Schedule_ProjSup" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Service_Rate1" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Schedule_Stage" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Stage_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_Supplement_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_StateContract_StateC" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_StateCSupplement_StateC" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_StateCSupplement_Supplement" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.FK_SupplementCurrencyType_Supplement" ManuallyRouted="false" />
+        <AssociationConnector Association="GProyModel.ContractCurrencyType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

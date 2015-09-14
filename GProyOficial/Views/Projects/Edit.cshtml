@@ -1,0 +1,936 @@
+@using System.Data.Entity
+@using System.Diagnostics.Eventing.Reader
+@using GProyOficial.Models
+@model GProyOficial.Models.Project
+
+@{
+    ViewBag.Title = "Editar";
+
+    int x = Model.projectId;
+    var dc = new GProyEntities();
+
+    var spec = dc.ProjSpecialist.Include("Specialist").Where(specialistz => specialistz.projectId == Model.projectId).ToList();
+    var areas = dc.Area.ToList();
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.projectId)
+        <input type="text" name="json" id="jsonid" value="" hidden="">
+        <input type="text" name="idpt" id="idpt" value="@Model.projectId" hidden="">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.areaId, "Area", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("areaId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.areaId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Cliente</label>
+            <div class="col-md-10">
+                <select class="form-control input-large select2me" id="clientId" name="clientId" required="required">
+                    <option value=""></option>
+                    <option value=@ViewBag.clientId.clientId selected="selected">@ViewBag.clientId.name</option>
+                </select>
+            </div>
+            <input type="text" id="idclientt" value="@ViewBag.clientId.clientId" hidden="">
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.advancePercent, "% de avance", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.advancePercent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.advancePercent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Fecha de inicio</label>
+
+            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                <input type="text" class="form-control" required="" id="startDate" name="startDate" value="@Model.startDate">
+                <span class="input-group-btn">
+                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+
+
+
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Fecha de Fin estimada</label>
+
+            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                <input type="text" class="form-control" readonly id="endDateEstimate" name="endDateEstimate" value="@Model.endDateEstimate">
+                <span class="input-group-btn">
+                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+
+
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.totalContracted, "Total contratado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.totalContracted, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.totalContracted, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.totalnvoiced, "Total facturado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.totalnvoiced, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.totalnvoiced, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.toInvoiced, "Por facturar", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.toInvoiced, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.toInvoiced, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Producto</label>
+            <div class="col-md-10">
+                <select class="form-control input-large select2me" id="productId" name="productId" required="required">
+                    <option value=""></option>
+                    <option value=@ViewBag.idProduct.productId selected="selected">@ViewBag.idProduct.name</option>
+                </select>
+            </div>
+            <input type="text" id="idprod" value="@ViewBag.idProduct.productId" hidden="">
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.modulequantity_, "Cantidad de modulos", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.modulequantity_, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.modulequantity_, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.complexity, "Complejidad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.complexity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.complexity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.plannedhours, "Horas planificadas", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.plannedhours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.plannedhours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.executedhours, "Horas ejecutadas", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.executedhours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.executedhours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.chronogramDeviation, "Desviacion del cronograma", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.chronogramDeviation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.chronogramDeviation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.observation, "Observacion", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.observation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.observation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-sm" }) <input type="submit" value="Aceptar" class="btn btn-default" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+
+            <div class="col-md-10 ">
+                <div class="portlet box blue-hoki tabbable">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="tabbable portlet-tabs">
+                            <ul class="nav nav-tabs">
+                                <li>
+                                    <a href="#portlet_tab3" data-toggle="tab">
+                                        Estado
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#portlet_tab2" data-toggle="tab">
+                                        Supementos
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="#portlet_tab1" data-toggle="tab">
+                                        Especiaistas
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="portlet_tab1">
+                                    <div class="portlet box blue-hoki">
+
+                                        <div class="portlet-title">
+                                            <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs" id="asig">Asignar</a>
+
+                                            Especialistas <span class="badge" style="background: #fff; color: #428BCA" id="cont">@spec.Count</span>
+
+
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+
+                                                <a href="" class="reload">
+                                                </a>
+                                                <a href="" class="remove">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="well well-sm">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    Area
+                                                                </th>
+                                                                <th hidden=""> </th>
+                                                                <th>
+                                                                    Especialista
+                                                                </th>
+                                                                <th>
+                                                                    Jefe del Proyecto
+                                                                </th>
+                                                                <th>
+
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+                                foreach (var specialistp in spec)
+                                {
+
+
+                                <tr>
+                                    <td><span id="area">@specialistp.Specialist.Area.name</span></td>
+                                    <td hidden=""><span id="id">@specialistp.specialistId</span></td>
+                                    <td><span id="nomb">@specialistp.Specialist.name</span></td>
+                                    <td>
+                                        @if (specialistp.boss)
+                                            {
+                                            <button type="button" class="btn-sm" id="sel" style="background: #00bfff">
+
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </button>
+                                            }
+                                        @if (specialistp.boss == false)
+                                            {
+                                            <button type="button" class="btn-sm" id="sel">
+
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </button>
+                                            }
+
+                                    </td>
+
+                                    <td>
+                                        <button type="button" class="btn-sm" id="deleteRow">
+                                            <span class="glyphicon glyphicon-remove-sign"></span>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane" id="portlet_tab2">
+                                    <div class="portlet box  blue-hoki">
+                                        @{
+                var sups = dc.ProjSup.Include("Supplement").Where(project => project.projectId == Model.projectId).ToList();
+                                        }
+                                        <div class="portlet-title">
+                                            Cronogramas. <span class="badge" style="background: #fff; color: #428BCA">@sups.Count</span> Suplementos Asignados
+
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+
+                                                <a href="" class="reload">
+                                                </a>
+                                                <a href="" class="remove">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="porelet-body">
+                                            <div class="well well-sm">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablesx">
+                                                        <thead>
+                                                            <tr>
+                                                                <th hidden="">
+                                                                    ID
+                                                                </th>
+                                                                <th>
+                                                                    Suplemento
+                                                                </th>
+                                                                <th>
+                                                                    Monto
+                                                                </th>
+                                                                <th>
+                                                                    Servicio
+                                                                </th>
+                                                                <th hidden="">
+                                                                    Id Serv
+                                                                </th>
+                                                                <th hidden="">
+                                                                    Id ProjSup
+                                                                </th>
+                                                                <th>
+                                                                    Facturado
+                                                                </th>
+                                                                <th>
+                                                                    Por Facturar
+                                                                </th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+                                double totalfact = 0;
+                                double totalxfact = 0;
+
+                                foreach (var s in sups)
+                                {
+
+                                    double facturado = 0;
+                                    double xfacturar = 0;
+                                    foreach (var v in s.ProjectDetails)
+                                    {
+                                        facturado += v.totalInvoiced;
+                                        totalfact += v.totalInvoiced;
+                                        xfacturar += v.toInvoice;
+                                        totalxfact += v.toInvoice;
+                                    }
+                                <tr>
+                                    <td hidden=""><span id="supid">@s.Supplement.supplementId</span></td>
+                                    <td><span id="supname">@s.Supplement.name</span></td>
+
+                                    @{
+                                            List<ProjSup> ps = s.Supplement.ProjSup.Where(a => a.Supplement.supplementId == s.supplementId).ToList();
+
+                                    }
+                                    <td><span id="monto">@ps[0].amount</span></td>
+                                    <td><span id="servname">@s.Supplement.Service.name</span></td>
+                                    <td><span>@facturado</span></td>
+                                    <td><span>@xfacturar</span></td>
+                                    <td><span id="sid" hidden="">@s.Supplement.serviceId</span></td>
+                                    <td><span id="projsupid" hidden="">@s.projSupId</span></td>
+
+                                    @{
+                                            StateCSupplement sstate = dc.StateCSupplement.First(ss => ss.supplementId == s.supplementId && ss.state);
+                                            if (sstate.StateC.stateCId == 6)
+                                            {
+                                        <td><a data-toggle="modal" class="btn btn-warning btn-xs" id="crono">Cronograma</a></td>
+                                            }
+                                            if (sstate.StateC.stateCId == 5)
+                                            {
+                                        <td><a data-toggle="modal" class="btn btn-success btn-xs" id="crono">Cronograma</a></td>
+                                            }
+                                            if (sstate.StateC.stateCId == 7)
+                                            {
+                                        <td><a data-toggle="modal" class="btn btn-danger btn-xs" id="crono">Cronograma</a></td>
+                                            }
+                                            if (sstate.StateC.stateCId == 10)
+                                            {
+                                                <td><a data-toggle="modal" class="btn blue-hoki btn-xs" id="crono">Cronograma</a></td>
+                                            }
+
+}
+
+
+                                </tr>
+                                }
+                                                            }
+
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="portlet_tab3">
+                                    <div class="portlet box blue-hoki ">
+                                        <div class="portlet-title">
+
+                                            Estado: @ViewBag.state.State1.name
+
+                                            <div class="tools">
+                                                <a href="" class="collapse">
+                                                </a>
+
+                                                <a href="" class="reload">
+                                                </a>
+                                                <a href="" class="remove">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body form-horizontal">
+                                            <div class="row">
+
+                                               
+                                                    <table>
+                                                        <tr class="col-md-6">
+                                                            <td>
+                                                                @if (ViewBag.state.State1.name == "EnProceso")
+                                                                {
+                                                                    <button type="button" class="btn btn-success form-control" id="enp00">EnProceso</button>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button type="button" class="btn blue-hoki form-control" id="enp00"> EnProceso</button>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="col-md-7">
+                                                            <td>
+                                                                @if (ViewBag.state.State1.name == "Detenido")
+                                                                {
+                                                                    <div class="input-group input-xlarge">
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn green" type="button" id="det00">Detenido</button>
+                                                                    </span>
+                                                                        <input class="form-control" placeholder="Causa de Detenci&oacute;n" type="text" id="rasondet" value="@ViewBag.state.description">
+                                                                    </div>
+                                                                    
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="input-group input-xlarge">
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn blue-hoki" type="button" id="det00">Detenido</button>
+                                                                    </span>
+                                                                        <input class="form-control input-xlarge" placeholder="Causa de Detenci&oacute;n" type="text" id="rasondet" style="width: 250px">
+                                                                    </div>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="col-md-8"><td>
+                                                                                 @if (ViewBag.state.State1.name == "Cancelado")
+                                                                                 {
+                                                                                     <div class="input-group input-xlarge">
+                                                                                         <span class="input-group-btn">
+                                                                                             <button class="btn green" type="button" id="canc00">Cancelado</button>
+                                                                                         </span>
+                                                                                         <input class="form-control" placeholder="Causa de Cancelaci&oacute;n" type="text" id="rasoncanc" value="@ViewBag.state.description">
+                                                                                     </div>
+                                                                                 }
+                                                                                 else
+                                                                                 {
+                                                                                     <div class="input-group input-xlarge">
+                                                                                         <span class="input-group-btn">
+                                                                                             <button class="btn blue-hoki" type="button" id="canc00">Cancelado</button>
+                                                                                         </span>
+                                                                                         <input class="form-control" placeholder="Causa de Cancelaci&oacute;n" type="text" id="rasoncanc">
+                                                                                     </div>
+                                                                                 }
+                                                        </td></tr>
+                                                    </table>
+                                              
+                                                
+                        </div>
+                        </div></div></div>
+                                </div>
+                            </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+        <!-- Modal asignar especialistas -->
+     
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4> ESPECIALISTAS</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#@areas[0].name">@areas[0].name</a></li>
+                            @for (var i = 1; i < areas.Count; i++)
+                    {
+                                <li><a href="#@areas[i].name">@areas[i].name</a></li>
+                    }
+
+
+                        </ul>
+
+                        <div class="tab-content">
+                            <!--Contenido Primer tab-->
+                            <div class="tab-pane active" id="@areas[0].name">
+                                @{
+                                                string idt = areas[0].name + "t";
+                                                var specialist = dc.Specialist.SqlQuery("Select * from Specialist where areaId=" + @areas[0].areaId).ToList();
+                                                foreach (ProjSpecialist t in spec)
+                                                {
+                                                    for (int j = 0; j < specialist.Count; j++)
+                                                    {
+                                                        if (t.specialistId == specialist[j].specialistId)
+                                                        {
+                                                            specialist.RemoveAt(j);
+                                                            break;
+                                                        }
+
+                                                    }
+                                                }
+
+                                }
+                                <div id="@areas[0].name">
+                                    <div class="portlet box grey-cascade">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-user"></i>@areas[0].name
+                                            </div>
+
+                                        </div>
+                                        <div class="portlet-body">
+                                            <table class="table table-striped table-bordered table-hover" id="@idt">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Area</th>
+                                                        <th hidden="">ID</th>
+                                                        <th>Nombre</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach (var s in specialist)
+                                                                {
+                                                        <tr>
+                                                            <td>
+                                                                <a class="btn btn-sm green" id="Asignar">
+                                                                    <span class="glyphicon glyphicon-arrow-down">
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            <td><span id="area">@areas[0].name</span></td>
+                                                            <td hidden=""><span id="id">@s.specialistId</span></td>
+                                                            <td><span id="nomb">@s.name</span></td>
+                                                        </tr>
+                                                                }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            @for (var i = 1; i < areas.Count; i++)
+                                        {
+                                             idt = areas[i].name + "t";
+                    <!--Ciclo para crear demas areas y especialistas-->
+                        var specialist1 = dc.Specialist.SqlQuery("Select * from Specialist where areaId=" + @areas[i].areaId).ToList();
+                        foreach (ProjSpecialist t in spec)
+                        {
+                            for (int j = 0; j < specialist1.Count; j++)
+                            {
+                                if (t.specialistId == specialist1[j].specialistId)
+                                {
+                                    specialist1.RemoveAt(j);
+                                    break;
+                                }
+
+                            }
+                        }
+
+
+                        <div class="tab-pane" id="@areas[i].name">
+                            <div class="portlet box grey-cascade">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-user"></i>@areas[i].name
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body">
+
+                                    <table class="table table-striped table-bordered table-hover" id="@idt">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Area</th>
+                                                <th hidden="">ID</th>
+                                                <th>Nombre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var s in specialist1)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a class="btn btn-sm green" id="Asignar">
+                                                            <span class="glyphicon glyphicon-arrow-down">
+                                                            </span>
+                                                        </a>
+                                                    </td>
+                                                    <td><span id="area">@areas[i].name</span></td>
+                                                    <td hidden=""><span id="id">@s.specialistId</span></td>
+                                                    <td><span id="nomb">@s.name</span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+
+
+
+                    }
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+                <!-- /.modal-dialog -->
+            </div>
+        </div><!-- /.modal -->
+        <!-- Modal Suplementos Cronogramas -->
+
+        <div class="modal fade in" role="dialog" id="modalsup" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <span id="titcron">Cronograma</span>
+                        <br>
+                        <span>Por Asignar-></span><span id="quedan" class="label-primary"></span>
+                        <br>
+                        <span hidden="">PSID</span><span id="psid" class="label-primary" hidden=""></span>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning" id="alerta">Nuevo Cronograma</div>
+                        <div class="alert alert-success" id="alertad" hidden="">Cronograma Definido</div>
+                        <div class="alert alert-warning" id="alertaerror" hidden="">Este cronograma tiene especialistas asignados y no se puede editar</div>
+                        <div style="text-align: center;">
+                            <table id="tablacron">
+                                <thead><tr><th></th><th>Fase</th><th>Dias</th><th>Monto</th><th></th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                        <div style="text-align: center;"><button type="button" class="btn btn-success btn-xs" id="savecron">Salvar Cronograma</button></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.modal-dialog -->
+        
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/Content/Site.js")
+            @Scripts.Render("~/Scripts/site.js")
+            <script type="text/javascript">
+                $('#myTab a').click(function (e) {
+                    e.preventDefault();
+                    $(this).tab('show');
+
+
+                });
+
+
+
+            </script>
+        }
+
+        <!-- Modal Detalles de las Fases -->
+        <div class="modal fade" id="detallefase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <table id="tabdetfase" class="webgrid-table">
+                            <tr>
+
+                                <th hidden="">
+                                    IDDetalle
+                                </th>
+                                <th hidden="">
+                                    IDFase
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Total Contratado
+                                </th>
+                                <th>
+                                    Total Facturado
+                                </th>
+                                <th>
+                                    Por Facturar
+                                </th>
+                                <th> <th>
+                                <th>
+
+                                </th>
+
+                            </tr>
+                            <tbody></tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        <!-- Modal Asignar especialistas a las fases -->
+        <div class="modal fade" id="modalspec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="label-primary">Especialistas posibles para la fase :</label> <span id="nombfase"> Nombre Fase</span>
+                        <br>
+                        <span id="detalleact" hidden=""> Nombre Fase</span>
+                        <br>
+                        <span id="porciq" hidden=""></span>
+                        <table id="tablaesp" class="webgrid-table">
+                            <thead>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <th>
+                                        Area
+                                    </th>
+                                    <th >
+                                      
+                                    </th>
+                                    <th>
+                                        Especialista
+                                    </th>
+                                    <th>
+                                        Jefe de Proyecto
+                                    </th>
+                                </tr>
+                            </thead>
+                        <tbody></tbody>
+                        </table>
+                        <div style="text-align: center; height: 30px"></div>
+                        <label class="label-success">Asingados</label>
+                        <div class="alert-info" id="esp001" hidden="">El especialista no puede ser eliminado. Tiene facturas asignadas</div>
+                        <table id="tablaespfase" class="webgrid-table">
+                            <thead>
+                                <tr>
+
+                                    <th>
+                                        Area
+                                    </th>
+                                    <th>
+                                         
+                                    </th>
+                                    <th>
+                                        Especialista
+                                    </th>
+                                    <th>
+                                        Participacion(%)
+                                    </th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                          <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        <!-- Modal Mensaje usos(eliminar especialista,asignar especialistas a fase de un proyecto) -->
+        <div class="modal fade in" id="modalmsj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+
+                    </div>
+                    <div class="modal-body">
+                        <span id="lbmjs"></span>
+                        <br>
+                        <span id="prestm"></span>
+                        <table id="tablamsj" class="webgrid-table">
+                            <tr>
+                                <th>
+
+                                </th>
+                                <th>
+                                    Area
+                                </th>
+                                <th>
+
+                                </th>
+                                <th>
+                                    Especialista
+                                </th>
+                                <th>
+                                    Jefe de Proyecto
+                                </th>
+                            </tr>
+                            <tbody></tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        <!-- Modal facturacion 1 -->
+    <div class="modal fade bs-modal-lg" id="modalfact1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+                </div>
+                <div class="modal-body">
+                    <table id="tablacreatefact"></table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+<div class="modal fade bs-modal-lg" id="modalfactdelete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+            </div>
+            <div class="modal-body">
+                <table id="tabladeletefact"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

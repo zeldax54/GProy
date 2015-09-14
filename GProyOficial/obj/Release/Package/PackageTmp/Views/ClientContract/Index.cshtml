@@ -1,0 +1,58 @@
+﻿@model GProyOficial.Models.ViewModel.ContractList
+@{
+    ViewBag.Title = "Contratos";
+}
+
+<h3>Contratos</h3>
+
+<p>
+    @Html.ActionLink("Crear", "Create", new { id = Model.ClientId }, new { @class = "btn btn-primary btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.number)-->Número
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.signedProvider)-->Firma del proveedor
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.expirationDate)-->Fecha de expiración
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.Client.name)-->Cliente
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Contracts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.signedProvider)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.expirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.name)
+            </td>
+            <td>
+                <!-- @Html.ActionLink("Edit", "Edit", new {id = item.contractId})-->
+                <a href="@Url.Action("Edit", "ClientContract", new {id = item.contractId})" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar"/> </a> |
+                <!--@Html.ActionLink("Details", "Details", new {id = item.contractId})-->
+                <a href="@Url.Action("Details", "ClientContract", new { id = item.contractId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles"/> </a>|
+                <!--@Html.ActionLink("Delete", "Delete", new {id = item.contractId})-->
+                <a href="@Url.Action("Delete", "ClientContract", new { id = item.contractId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar"/> </a>
+                @Html.ActionLink("Suplementos", "Index", "Supplements", new { id = item.contractId, idclient = true }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Volver", "Index", "Clients", null, new { @class = "btn btn-success btn-sm" })
+

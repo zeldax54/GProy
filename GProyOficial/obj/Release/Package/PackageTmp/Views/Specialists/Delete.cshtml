@@ -1,0 +1,48 @@
+﻿@model GProyOficial.Models.Specialist
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+
+
+<h3>Esta seguro de que desea eliminar este registro?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.ci)-->C.i
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ci)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.Area.name)-->Area
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-sm" }) <input type="submit" value="Aceptar" class="btn btn-default" /> 
+           
+        </div>
+    }
+</div>

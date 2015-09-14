@@ -1,0 +1,1233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GProyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountBank">
+    <Key>
+      <PropertyRef Name="bankId" />
+      <PropertyRef Name="accountNumber" />
+    </Key>
+    <Property Name="clientId" Type="int" />
+    <Property Name="bankId" Type="int" Nullable="false" />
+    <Property Name="currencyTypeId" Type="int" Nullable="false" />
+    <Property Name="accountNumber" Type="bigint" Nullable="false" />
+    <Property Name="titular" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="areaId" />
+    </Key>
+    <Property Name="areaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="boss" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="areaEntityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attached">
+    <Key>
+      <PropertyRef Name="attachedId" />
+    </Key>
+    <Property Name="attachedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="supplementId" Type="int" Nullable="false" />
+    <Property Name="archive" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="bankId" />
+    </Key>
+    <Property Name="bankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="branch" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="street" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="province" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="clientId" />
+    </Key>
+    <Property Name="clientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateCreation" Type="date" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="identifAbrev" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="reup" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="street" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="province" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telephone" Type="nvarchar(max)" />
+    <Property Name="email" Type="nvarchar(max)" />
+    <Property Name="agent" Type="nvarchar(max)" />
+    <Property Name="agentPosition" Type="nvarchar(max)" />
+    <Property Name="organismId" Type="int" Nullable="false" />
+    <Property Name="country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isSubject" Type="bit" Nullable="false" />
+    <Property Name="fatherId" Type="int" />
+    <Property Name="legalPerson" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClientSupplement">
+    <Key>
+      <PropertyRef Name="clientId" />
+      <PropertyRef Name="supplementId" />
+    </Key>
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="supplementId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="contractId" />
+    </Key>
+    <Property Name="contractId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="signedProvider" Type="date" Nullable="false" />
+    <Property Name="nom1" Type="nvarchar(max)" />
+    <Property Name="nom2" Type="nvarchar(max)" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="expirationDate" Type="date" Nullable="false" />
+    <Property Name="signedClient" Type="date" />
+    <Property Name="comitteNumber" Type="int" />
+    <Property Name="comitteDate" Type="date" />
+  </EntityType>
+  <EntityType Name="ContractCurrencyType">
+    <Key>
+      <PropertyRef Name="Contract_contractId" />
+      <PropertyRef Name="CurrencyType_currencyTypeId" />
+    </Key>
+    <Property Name="Contract_contractId" Type="int" Nullable="false" />
+    <Property Name="CurrencyType_currencyTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CurrencyType">
+    <Key>
+      <PropertyRef Name="currencyTypeId" />
+    </Key>
+    <Property Name="currencyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entity">
+    <Key>
+      <PropertyRef Name="entityId" />
+    </Key>
+    <Property Name="entityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="reupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="identifAbrev" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="organismId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GlobalService">
+    <Key>
+      <PropertyRef Name="globalServiceId" />
+    </Key>
+    <Property Name="globalServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="invoiceId" />
+    </Key>
+    <Property Name="invoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="productId" Type="int" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="state" Type="int" Nullable="false" />
+    <Property Name="invoiceNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceProjectDetails">
+    <Key>
+      <PropertyRef Name="invoiceProjectDetailsId" />
+    </Key>
+    <Property Name="invoiceId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="invoiceProjectDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="projDetailsSpecialistId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceStateSet">
+    <Key>
+      <PropertyRef Name="invoiceId" />
+      <PropertyRef Name="stateId" />
+    </Key>
+    <Property Name="date" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="state" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="invoiceId" Type="int" Nullable="false" />
+    <Property Name="stateId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="menuId" />
+    </Key>
+    <Property Name="menuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="fatherId" Type="int" Nullable="false" />
+    <Property Name="url" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Organism">
+    <Key>
+      <PropertyRef Name="organismId" />
+    </Key>
+    <Property Name="organismId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="version" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="projectId" />
+    </Key>
+    <Property Name="projectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="areaId" Type="int" />
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="advancePercent" Type="float" Nullable="false" />
+    <Property Name="startDate" Type="datetime" />
+    <Property Name="endDateEstimate" Type="datetime" />
+    <Property Name="totalContracted" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+    <Property Name="totalnvoiced" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="toInvoiced" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="productId" Type="int" />
+    <Property Name="modulequantity_" Type="int" />
+    <Property Name="complexity" Type="int" />
+    <Property Name="plannedhours" Type="float" />
+    <Property Name="executedhours" Type="float" />
+    <Property Name="chronogramDeviation" Type="float" />
+    <Property Name="observation" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ProjectDetails">
+    <Key>
+      <PropertyRef Name="projectDetailsId" />
+    </Key>
+    <Property Name="stageId" Type="int" Nullable="false" />
+    <Property Name="totalContracted" Type="float" Nullable="false" />
+    <Property Name="totalInvoiced" Type="float" Nullable="false" />
+    <Property Name="toInvoice" Type="float" Nullable="false" />
+    <Property Name="projectDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="projSupId" Type="int" Nullable="false" />
+    <Property Name="state" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectDetailsSpecialist">
+    <Key>
+      <PropertyRef Name="projDetailsSpecialistId" />
+    </Key>
+    <Property Name="projSpecialistId" Type="int" Nullable="false" />
+    <Property Name="projectDetailsId" Type="int" Nullable="false" />
+    <Property Name="projDetailsSpecialistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="participationPercent" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectState">
+    <Key>
+      <PropertyRef Name="projectId" />
+      <PropertyRef Name="stateId" />
+    </Key>
+    <Property Name="projectId" Type="int" Nullable="false" />
+    <Property Name="stateId" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="state" Type="bit" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ProjSpecialist">
+    <Key>
+      <PropertyRef Name="projSpecialistId" />
+    </Key>
+    <Property Name="projectId" Type="int" Nullable="false" />
+    <Property Name="specialistId" Type="int" Nullable="false" />
+    <Property Name="boss" Type="bit" Nullable="false" />
+    <Property Name="projSpecialistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjSup">
+    <Key>
+      <PropertyRef Name="projSupId" />
+    </Key>
+    <Property Name="projectId" Type="int" Nullable="false" />
+    <Property Name="supplementId" Type="int" Nullable="false" />
+    <Property Name="projSupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="rateId" />
+    </Key>
+    <Property Name="rateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rate1" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userType" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="stageId" />
+      <PropertyRef Name="projSupId" />
+    </Key>
+    <Property Name="stageId" Type="int" Nullable="false" />
+    <Property Name="nDays" Type="float" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="projSupId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="serviceId" />
+    </Key>
+    <Property Name="serviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="globalServiceId" Type="int" Nullable="false" />
+    <Property Name="rateId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specialist">
+    <Key>
+      <PropertyRef Name="specialistId" />
+    </Key>
+    <Property Name="specialistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="areaId" Type="int" Nullable="false" />
+    <Property Name="ci" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stage">
+    <Key>
+      <PropertyRef Name="stageId" />
+    </Key>
+    <Property Name="stageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="serviceId" Type="int" Nullable="false" />
+    <Property Name="orden" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="stateId" />
+    </Key>
+    <Property Name="stateId" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StateC">
+    <Key>
+      <PropertyRef Name="stateCId" />
+    </Key>
+    <Property Name="stateCId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StateContract">
+    <Key>
+      <PropertyRef Name="stateCId" />
+      <PropertyRef Name="contractId" />
+    </Key>
+    <Property Name="stateCId" Type="int" Nullable="false" />
+    <Property Name="contractId" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="state" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StateCSupplement">
+    <Key>
+      <PropertyRef Name="stateCId" />
+      <PropertyRef Name="supplementId" />
+    </Key>
+    <Property Name="stateCId" Type="int" Nullable="false" />
+    <Property Name="supplementId" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="state" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supplement">
+    <Key>
+      <PropertyRef Name="supplementId" />
+    </Key>
+    <Property Name="supplementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="number" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="contractId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+    <Property Name="nom1" Type="nvarchar(max)" />
+    <Property Name="nom2" Type="nvarchar(max)" />
+    <Property Name="signedClient" Type="date" />
+    <Property Name="productId" Type="int" />
+    <Property Name="serviceId" Type="int" Nullable="false" />
+    <Property Name="signedProvider" Type="date" Nullable="false" />
+    <Property Name="comitteNumber" Type="int" />
+    <Property Name="comitteDate" Type="date" />
+    <Property Name="expirationDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupplementCurrencyType">
+    <Key>
+      <PropertyRef Name="supplementId" />
+      <PropertyRef Name="currencyTypeId" />
+    </Key>
+    <Property Name="supplementId" Type="int" Nullable="false" />
+    <Property Name="currencyTypeId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Temp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Value" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="roleId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccountBankClient_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+    <End Role="AccountBank" Type="Self.AccountBank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="bankId" />
+      </Principal>
+      <Dependent Role="AccountBank">
+        <PropertyRef Name="bankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountBankClient_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="AccountBank" Type="Self.AccountBank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="AccountBank">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountBankClient_CurrencyType">
+    <End Role="CurrencyType" Type="Self.CurrencyType" Multiplicity="1" />
+    <End Role="AccountBank" Type="Self.AccountBank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyType">
+        <PropertyRef Name="currencyTypeId" />
+      </Principal>
+      <Dependent Role="AccountBank">
+        <PropertyRef Name="currencyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="entityId" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="areaEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Attached_Supplement">
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="1" />
+    <End Role="Attached" Type="Self.Attached" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplement">
+        <PropertyRef Name="supplementId" />
+      </Principal>
+      <Dependent Role="Attached">
+        <PropertyRef Name="supplementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Client1" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="Client1">
+        <PropertyRef Name="fatherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_Organism">
+    <End Role="Organism" Type="Self.Organism" Multiplicity="1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organism">
+        <PropertyRef Name="organismId" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="organismId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientInvoice">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientSupplement_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="ClientSupplement" Type="Self.ClientSupplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="ClientSupplement">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientSupplement_Supplement">
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="1" />
+    <End Role="ClientSupplement" Type="Self.ClientSupplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplement">
+        <PropertyRef Name="supplementId" />
+      </Principal>
+      <Dependent Role="ClientSupplement">
+        <PropertyRef Name="supplementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractClient">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractCurrencyType_Contract">
+    <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+    <End Role="ContractCurrencyType" Type="Self.ContractCurrencyType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="contractId" />
+      </Principal>
+      <Dependent Role="ContractCurrencyType">
+        <PropertyRef Name="Contract_contractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractCurrencyType_CurrencyType">
+    <End Role="CurrencyType" Type="Self.CurrencyType" Multiplicity="1" />
+    <End Role="ContractCurrencyType" Type="Self.ContractCurrencyType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyType">
+        <PropertyRef Name="currencyTypeId" />
+      </Principal>
+      <Dependent Role="ContractCurrencyType">
+        <PropertyRef Name="CurrencyType_currencyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractSupplement">
+    <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="contractId" />
+      </Principal>
+      <Dependent Role="Supplement">
+        <PropertyRef Name="contractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityOrganism">
+    <End Role="Organism" Type="Self.Organism" Multiplicity="1" />
+    <End Role="Entity" Type="Self.Entity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organism">
+        <PropertyRef Name="organismId" />
+      </Principal>
+      <Dependent Role="Entity">
+        <PropertyRef Name="organismId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceProjectDetails_Invoice">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="InvoiceProjectDetails" Type="Self.InvoiceProjectDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="invoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceProjectDetails">
+        <PropertyRef Name="invoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceProjectDetails_ProjectDetailsSpecialist">
+    <End Role="ProjectDetailsSpecialist" Type="Self.ProjectDetailsSpecialist" Multiplicity="1" />
+    <End Role="InvoiceProjectDetails" Type="Self.InvoiceProjectDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectDetailsSpecialist">
+        <PropertyRef Name="projDetailsSpecialistId" />
+      </Principal>
+      <Dependent Role="InvoiceProjectDetails">
+        <PropertyRef Name="projDetailsSpecialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceStateInvoice">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="InvoiceStateSet" Type="Self.InvoiceStateSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="invoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceStateSet">
+        <PropertyRef Name="invoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceStateState">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="InvoiceStateSet" Type="Self.InvoiceStateSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="stateId" />
+      </Principal>
+      <Dependent Role="InvoiceStateSet">
+        <PropertyRef Name="stateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="areaId" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="areaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDetails_ProjSup">
+    <End Role="ProjSup" Type="Self.ProjSup" Multiplicity="1" />
+    <End Role="ProjectDetails" Type="Self.ProjectDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjSup">
+        <PropertyRef Name="projSupId" />
+      </Principal>
+      <Dependent Role="ProjectDetails">
+        <PropertyRef Name="projSupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDetails_Stage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+    <End Role="ProjectDetails" Type="Self.ProjectDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="stageId" />
+      </Principal>
+      <Dependent Role="ProjectDetails">
+        <PropertyRef Name="stageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDetailsSpecialist_ProjectDetails">
+    <End Role="ProjectDetails" Type="Self.ProjectDetails" Multiplicity="1" />
+    <End Role="ProjectDetailsSpecialist" Type="Self.ProjectDetailsSpecialist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectDetails">
+        <PropertyRef Name="projectDetailsId" />
+      </Principal>
+      <Dependent Role="ProjectDetailsSpecialist">
+        <PropertyRef Name="projectDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDetailsSpecialist_ProjSpecialist">
+    <End Role="ProjSpecialist" Type="Self.ProjSpecialist" Multiplicity="1" />
+    <End Role="ProjectDetailsSpecialist" Type="Self.ProjectDetailsSpecialist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjSpecialist">
+        <PropertyRef Name="projSpecialistId" />
+      </Principal>
+      <Dependent Role="ProjectDetailsSpecialist">
+        <PropertyRef Name="projSpecialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectState_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectState" Type="Self.ProjectState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="projectId" />
+      </Principal>
+      <Dependent Role="ProjectState">
+        <PropertyRef Name="projectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectState_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="ProjectState" Type="Self.ProjectState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="stateId" />
+      </Principal>
+      <Dependent Role="ProjectState">
+        <PropertyRef Name="stateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjSpecialist_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjSpecialist" Type="Self.ProjSpecialist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="projectId" />
+      </Principal>
+      <Dependent Role="ProjSpecialist">
+        <PropertyRef Name="projectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjSpecialist_Specialist">
+    <End Role="Specialist" Type="Self.Specialist" Multiplicity="1" />
+    <End Role="ProjSpecialist" Type="Self.ProjSpecialist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialist">
+        <PropertyRef Name="specialistId" />
+      </Principal>
+      <Dependent Role="ProjSpecialist">
+        <PropertyRef Name="specialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjSup_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjSup" Type="Self.ProjSup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="projectId" />
+      </Principal>
+      <Dependent Role="ProjSup">
+        <PropertyRef Name="projectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjSup_Supplement">
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="1" />
+    <End Role="ProjSup" Type="Self.ProjSup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplement">
+        <PropertyRef Name="supplementId" />
+      </Principal>
+      <Dependent Role="ProjSup">
+        <PropertyRef Name="supplementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schedule_ProjSup">
+    <End Role="ProjSup" Type="Self.ProjSup" Multiplicity="1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjSup">
+        <PropertyRef Name="projSupId" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="projSupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schedule_Stage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="stageId" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="stageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_GlobalService">
+    <End Role="GlobalService" Type="Self.GlobalService" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalService">
+        <PropertyRef Name="globalServiceId" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="globalServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Rate1">
+    <End Role="Rate" Type="Self.Rate" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rate">
+        <PropertyRef Name="rateId" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="rateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpecialistNom_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Specialist" Type="Self.Specialist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="areaId" />
+      </Principal>
+      <Dependent Role="Specialist">
+        <PropertyRef Name="areaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stage_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="serviceId" />
+      </Principal>
+      <Dependent Role="Stage">
+        <PropertyRef Name="serviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StateContract_Contract">
+    <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+    <End Role="StateContract" Type="Self.StateContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="contractId" />
+      </Principal>
+      <Dependent Role="StateContract">
+        <PropertyRef Name="contractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StateContract_StateC">
+    <End Role="StateC" Type="Self.StateC" Multiplicity="1" />
+    <End Role="StateContract" Type="Self.StateContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StateC">
+        <PropertyRef Name="stateCId" />
+      </Principal>
+      <Dependent Role="StateContract">
+        <PropertyRef Name="stateCId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StateCSupplement_StateC">
+    <End Role="StateC" Type="Self.StateC" Multiplicity="1" />
+    <End Role="StateCSupplement" Type="Self.StateCSupplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StateC">
+        <PropertyRef Name="stateCId" />
+      </Principal>
+      <Dependent Role="StateCSupplement">
+        <PropertyRef Name="stateCId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StateCSupplement_Supplement">
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="1" />
+    <End Role="StateCSupplement" Type="Self.StateCSupplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplement">
+        <PropertyRef Name="supplementId" />
+      </Principal>
+      <Dependent Role="StateCSupplement">
+        <PropertyRef Name="supplementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectProject">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplement_ProductNom">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Supplement">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplement_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="serviceId" />
+      </Principal>
+      <Dependent Role="Supplement">
+        <PropertyRef Name="serviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplementCurrencyType_CurrencyType">
+    <End Role="CurrencyType" Type="Self.CurrencyType" Multiplicity="1" />
+    <End Role="SupplementCurrencyType" Type="Self.SupplementCurrencyType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyType">
+        <PropertyRef Name="currencyTypeId" />
+      </Principal>
+      <Dependent Role="SupplementCurrencyType">
+        <PropertyRef Name="currencyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplementCurrencyType_Supplement">
+    <End Role="Supplement" Type="Self.Supplement" Multiplicity="1" />
+    <End Role="SupplementCurrencyType" Type="Self.SupplementCurrencyType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplement">
+        <PropertyRef Name="supplementId" />
+      </Principal>
+      <Dependent Role="SupplementCurrencyType">
+        <PropertyRef Name="supplementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="GProyModelStoreContainer">
+    <EntitySet Name="AccountBank" EntityType="Self.AccountBank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attached" EntityType="Self.Attached" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientSupplement" EntityType="Self.ClientSupplement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractCurrencyType" EntityType="Self.ContractCurrencyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurrencyType" EntityType="Self.CurrencyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entity" EntityType="Self.Entity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GlobalService" EntityType="Self.GlobalService" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceProjectDetails" EntityType="Self.InvoiceProjectDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceStateSet" EntityType="Self.InvoiceStateSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organism" EntityType="Self.Organism" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectDetails" EntityType="Self.ProjectDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectDetailsSpecialist" EntityType="Self.ProjectDetailsSpecialist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectState" EntityType="Self.ProjectState" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjSpecialist" EntityType="Self.ProjSpecialist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjSup" EntityType="Self.ProjSup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specialist" EntityType="Self.Specialist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StateC" EntityType="Self.StateC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StateContract" EntityType="Self.StateContract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StateCSupplement" EntityType="Self.StateCSupplement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplement" EntityType="Self.Supplement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupplementCurrencyType" EntityType="Self.SupplementCurrencyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Temp" EntityType="Self.Temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AccountBankClient_Bank" Association="Self.FK_AccountBankClient_Bank">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="AccountBank" EntitySet="AccountBank" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountBankClient_Client" Association="Self.FK_AccountBankClient_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="AccountBank" EntitySet="AccountBank" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountBankClient_CurrencyType" Association="Self.FK_AccountBankClient_CurrencyType">
+      <End Role="CurrencyType" EntitySet="CurrencyType" />
+      <End Role="AccountBank" EntitySet="AccountBank" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_Entity" Association="Self.FK_Area_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Attached_Supplement" Association="Self.FK_Attached_Supplement">
+      <End Role="Supplement" EntitySet="Supplement" />
+      <End Role="Attached" EntitySet="Attached" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_Client" Association="Self.FK_Client_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Client1" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_Organism" Association="Self.FK_Client_Organism">
+      <End Role="Organism" EntitySet="Organism" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientInvoice" Association="Self.FK_ClientInvoice">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientSupplement_Client" Association="Self.FK_ClientSupplement_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ClientSupplement" EntitySet="ClientSupplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientSupplement_Supplement" Association="Self.FK_ClientSupplement_Supplement">
+      <End Role="Supplement" EntitySet="Supplement" />
+      <End Role="ClientSupplement" EntitySet="ClientSupplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractClient" Association="Self.FK_ContractClient">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractCurrencyType_Contract" Association="Self.FK_ContractCurrencyType_Contract">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="ContractCurrencyType" EntitySet="ContractCurrencyType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractCurrencyType_CurrencyType" Association="Self.FK_ContractCurrencyType_CurrencyType">
+      <End Role="CurrencyType" EntitySet="CurrencyType" />
+      <End Role="ContractCurrencyType" EntitySet="ContractCurrencyType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractSupplement" Association="Self.FK_ContractSupplement">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="Supplement" EntitySet="Supplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityOrganism" Association="Self.FK_EntityOrganism">
+      <End Role="Organism" EntitySet="Organism" />
+      <End Role="Entity" EntitySet="Entity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Product" Association="Self.FK_Invoice_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceProjectDetails_Invoice" Association="Self.FK_InvoiceProjectDetails_Invoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="InvoiceProjectDetails" EntitySet="InvoiceProjectDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceProjectDetails_ProjectDetailsSpecialist" Association="Self.FK_InvoiceProjectDetails_ProjectDetailsSpecialist">
+      <End Role="ProjectDetailsSpecialist" EntitySet="ProjectDetailsSpecialist" />
+      <End Role="InvoiceProjectDetails" EntitySet="InvoiceProjectDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceStateInvoice" Association="Self.FK_InvoiceStateInvoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="InvoiceStateSet" EntitySet="InvoiceStateSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceStateState" Association="Self.FK_InvoiceStateState">
+      <End Role="State" EntitySet="State" />
+      <End Role="InvoiceStateSet" EntitySet="InvoiceStateSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Area" Association="Self.FK_Project_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Product" Association="Self.FK_Project_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDetails_ProjSup" Association="Self.FK_ProjectDetails_ProjSup">
+      <End Role="ProjSup" EntitySet="ProjSup" />
+      <End Role="ProjectDetails" EntitySet="ProjectDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDetails_Stage" Association="Self.FK_ProjectDetails_Stage">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="ProjectDetails" EntitySet="ProjectDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDetailsSpecialist_ProjectDetails" Association="Self.FK_ProjectDetailsSpecialist_ProjectDetails">
+      <End Role="ProjectDetails" EntitySet="ProjectDetails" />
+      <End Role="ProjectDetailsSpecialist" EntitySet="ProjectDetailsSpecialist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDetailsSpecialist_ProjSpecialist" Association="Self.FK_ProjectDetailsSpecialist_ProjSpecialist">
+      <End Role="ProjSpecialist" EntitySet="ProjSpecialist" />
+      <End Role="ProjectDetailsSpecialist" EntitySet="ProjectDetailsSpecialist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectState_Project" Association="Self.FK_ProjectState_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectState" EntitySet="ProjectState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectState_State" Association="Self.FK_ProjectState_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="ProjectState" EntitySet="ProjectState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjSpecialist_Project" Association="Self.FK_ProjSpecialist_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjSpecialist" EntitySet="ProjSpecialist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjSpecialist_Specialist" Association="Self.FK_ProjSpecialist_Specialist">
+      <End Role="Specialist" EntitySet="Specialist" />
+      <End Role="ProjSpecialist" EntitySet="ProjSpecialist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjSup_Project" Association="Self.FK_ProjSup_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjSup" EntitySet="ProjSup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjSup_Supplement" Association="Self.FK_ProjSup_Supplement">
+      <End Role="Supplement" EntitySet="Supplement" />
+      <End Role="ProjSup" EntitySet="ProjSup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schedule_ProjSup" Association="Self.FK_Schedule_ProjSup">
+      <End Role="ProjSup" EntitySet="ProjSup" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schedule_Stage" Association="Self.FK_Schedule_Stage">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_GlobalService" Association="Self.FK_Service_GlobalService">
+      <End Role="GlobalService" EntitySet="GlobalService" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Rate1" Association="Self.FK_Service_Rate1">
+      <End Role="Rate" EntitySet="Rate" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpecialistNom_Area" Association="Self.FK_SpecialistNom_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Specialist" EntitySet="Specialist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stage_Service" Association="Self.FK_Stage_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Stage" EntitySet="Stage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StateContract_Contract" Association="Self.FK_StateContract_Contract">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="StateContract" EntitySet="StateContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StateContract_StateC" Association="Self.FK_StateContract_StateC">
+      <End Role="StateC" EntitySet="StateC" />
+      <End Role="StateContract" EntitySet="StateContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StateCSupplement_StateC" Association="Self.FK_StateCSupplement_StateC">
+      <End Role="StateC" EntitySet="StateC" />
+      <End Role="StateCSupplement" EntitySet="StateCSupplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StateCSupplement_Supplement" Association="Self.FK_StateCSupplement_Supplement">
+      <End Role="Supplement" EntitySet="Supplement" />
+      <End Role="StateCSupplement" EntitySet="StateCSupplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectProject" Association="Self.FK_SubjectProject">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplement_ProductNom" Association="Self.FK_Supplement_ProductNom">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Supplement" EntitySet="Supplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplement_Service" Association="Self.FK_Supplement_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Supplement" EntitySet="Supplement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplementCurrencyType_CurrencyType" Association="Self.FK_SupplementCurrencyType_CurrencyType">
+      <End Role="CurrencyType" EntitySet="CurrencyType" />
+      <End Role="SupplementCurrencyType" EntitySet="SupplementCurrencyType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplementCurrencyType_Supplement" Association="Self.FK_SupplementCurrencyType_Supplement">
+      <End Role="Supplement" EntitySet="Supplement" />
+      <End Role="SupplementCurrencyType" EntitySet="SupplementCurrencyType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,33 @@
+﻿@model GProyOficial.Models.Organism
+
+@{
+    ViewBag.Title = "Eliminar Registro";
+}
+
+
+
+<h3>Está seguro de que desea eliminar este registro?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.name)-->Organismo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Cancelar", "Index", null, new{@class="btn btn-danger btn-sm"})
+            <input type="submit" value="Aceptar" class="btn btn-default btn-sm" /> 
+           
+        </div>
+    }
+</div>

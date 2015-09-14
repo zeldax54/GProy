@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GProyModelStoreContainer" CdmEntityContainer="GProyEntities">
+    <EntitySetMapping Name="AccountBank">
+      <EntityTypeMapping TypeName="GProyModel.AccountBank">
+        <MappingFragment StoreEntitySet="AccountBank">
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="bankId" ColumnName="bankId" />
+          <ScalarProperty Name="currencyTypeId" ColumnName="currencyTypeId" />
+          <ScalarProperty Name="accountNumber" ColumnName="accountNumber" />
+          <ScalarProperty Name="titular" ColumnName="titular" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="GProyModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="areaId" ColumnName="areaId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="boss" ColumnName="boss" />
+          <ScalarProperty Name="areaEntityId" ColumnName="areaEntityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attached">
+      <EntityTypeMapping TypeName="GProyModel.Attached">
+        <MappingFragment StoreEntitySet="Attached">
+          <ScalarProperty Name="attachedId" ColumnName="attachedId" />
+          <ScalarProperty Name="supplementId" ColumnName="supplementId" />
+          <ScalarProperty Name="archive" ColumnName="archive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bank">
+      <EntityTypeMapping TypeName="GProyModel.Bank">
+        <MappingFragment StoreEntitySet="Bank">
+          <ScalarProperty Name="bankId" ColumnName="bankId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="country" ColumnName="country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="GProyModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="identifAbrev" ColumnName="identifAbrev" />
+          <ScalarProperty Name="reup" ColumnName="reup" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="agent" ColumnName="agent" />
+          <ScalarProperty Name="agentPosition" ColumnName="agentPosition" />
+          <ScalarProperty Name="organismId" ColumnName="organismId" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="isSubject" ColumnName="isSubject" />
+          <ScalarProperty Name="fatherId" ColumnName="fatherId" />
+          <ScalarProperty Name="legalPerson" ColumnName="legalPerson" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientSupplement">
+      <EntityTypeMapping TypeName="GProyModel.ClientSupplement">
+        <MappingFragment StoreEntitySet="ClientSupplement">
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="supplementId" ColumnName="supplementId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contract">
+      <EntityTypeMapping TypeName="GProyModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="contractId" ColumnName="contractId" />
+          <ScalarProperty Name="number" ColumnName="number" />
+          <ScalarProperty Name="signedProvider" ColumnName="signedProvider" />
+          <ScalarProperty Name="nom1" ColumnName="nom1" />
+          <ScalarProperty Name="nom2" ColumnName="nom2" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="expirationDate" ColumnName="expirationDate" />
+          <ScalarProperty Name="signedClient" ColumnName="signedClient" />
+          <ScalarProperty Name="comitteNumber" ColumnName="comitteNumber" />
+          <ScalarProperty Name="comitteDate" ColumnName="comitteDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrencyType">
+      <EntityTypeMapping TypeName="GProyModel.CurrencyType">
+        <MappingFragment StoreEntitySet="CurrencyType">
+          <ScalarProperty Name="currencyTypeId" ColumnName="currencyTypeId" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entity">
+      <EntityTypeMapping TypeName="GProyModel.Entity">
+        <MappingFragment StoreEntitySet="Entity">
+          <ScalarProperty Name="entityId" ColumnName="entityId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="reupCode" ColumnName="reupCode" />
+          <ScalarProperty Name="identifAbrev" ColumnName="identifAbrev" />
+          <ScalarProperty Name="organismId" ColumnName="organismId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GlobalService">
+      <EntityTypeMapping TypeName="GProyModel.GlobalService">
+        <MappingFragment StoreEntitySet="GlobalService">
+          <ScalarProperty Name="globalServiceId" ColumnName="globalServiceId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoice">
+      <EntityTypeMapping TypeName="GProyModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="invoiceNum" ColumnName="invoiceNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceProjectDetails">
+      <EntityTypeMapping TypeName="GProyModel.InvoiceProjectDetails">
+        <MappingFragment StoreEntitySet="InvoiceProjectDetails">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="invoiceProjectDetailsId" ColumnName="invoiceProjectDetailsId" />
+          <ScalarProperty Name="projDetailsSpecialistId" ColumnName="projDetailsSpecialistId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceStateSet">
+      <EntityTypeMapping TypeName="GProyModel.InvoiceStateSet">
+        <MappingFragment StoreEntitySet="InvoiceStateSet">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="GProyModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="menuId" ColumnName="menuId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="fatherId" ColumnName="fatherId" />
+          <ScalarProperty Name="url" ColumnName="url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organism">
+      <EntityTypeMapping TypeName="GProyModel.Organism">
+        <MappingFragment StoreEntitySet="Organism">
+          <ScalarProperty Name="organismId" ColumnName="organismId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="GProyModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="version" ColumnName="version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project">
+      <EntityTypeMapping TypeName="GProyModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="projectId" ColumnName="projectId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="areaId" ColumnName="areaId" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="advancePercent" ColumnName="advancePercent" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDateEstimate" ColumnName="endDateEstimate" />
+          <ScalarProperty Name="totalContracted" ColumnName="totalContracted" />
+          <ScalarProperty Name="totalnvoiced" ColumnName="totalnvoiced" />
+          <ScalarProperty Name="toInvoiced" ColumnName="toInvoiced" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="modulequantity_" ColumnName="modulequantity_" />
+          <ScalarProperty Name="complexity" ColumnName="complexity" />
+          <ScalarProperty Name="plannedhours" ColumnName="plannedhours" />
+          <ScalarProperty Name="executedhours" ColumnName="executedhours" />
+          <ScalarProperty Name="chronogramDeviation" ColumnName="chronogramDeviation" />
+          <ScalarProperty Name="observation" ColumnName="observation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectDetails">
+      <EntityTypeMapping TypeName="GProyModel.ProjectDetails">
+        <MappingFragment StoreEntitySet="ProjectDetails">
+          <ScalarProperty Name="stageId" ColumnName="stageId" />
+          <ScalarProperty Name="totalContracted" ColumnName="totalContracted" />
+          <ScalarProperty Name="totalInvoiced" ColumnName="totalInvoiced" />
+          <ScalarProperty Name="toInvoice" ColumnName="toInvoice" />
+          <ScalarProperty Name="projectDetailsId" ColumnName="projectDetailsId" />
+          <ScalarProperty Name="projSupId" ColumnName="projSupId" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectDetailsSpecialist">
+      <EntityTypeMapping TypeName="GProyModel.ProjectDetailsSpecialist">
+        <MappingFragment StoreEntitySet="ProjectDetailsSpecialist">
+          <ScalarProperty Name="projSpecialistId" ColumnName="projSpecialistId" />
+          <ScalarProperty Name="projectDetailsId" ColumnName="projectDetailsId" />
+          <ScalarProperty Name="projDetailsSpecialistId" ColumnName="projDetailsSpecialistId" />
+          <ScalarProperty Name="participationPercent" ColumnName="participationPercent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectState">
+      <EntityTypeMapping TypeName="GProyModel.ProjectState">
+        <MappingFragment StoreEntitySet="ProjectState">
+          <ScalarProperty Name="projectId" ColumnName="projectId" />
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjSpecialist">
+      <EntityTypeMapping TypeName="GProyModel.ProjSpecialist">
+        <MappingFragment StoreEntitySet="ProjSpecialist">
+          <ScalarProperty Name="projectId" ColumnName="projectId" />
+          <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+          <ScalarProperty Name="boss" ColumnName="boss" />
+          <ScalarProperty Name="projSpecialistId" ColumnName="projSpecialistId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjSup">
+      <EntityTypeMapping TypeName="GProyModel.ProjSup">
+        <MappingFragment StoreEntitySet="ProjSup">
+          <ScalarProperty Name="projectId" ColumnName="projectId" />
+          <ScalarProperty Name="supplementId" ColumnName="supplementId" />
+          <ScalarProperty Name="projSupId" ColumnName="projSupId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rate">
+      <EntityTypeMapping TypeName="GProyModel.Rate">
+        <MappingFragment StoreEntitySet="Rate">
+          <ScalarProperty Name="rateId" ColumnName="rateId" />
+          <ScalarProperty Name="rate1" ColumnName="rate1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="GProyModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schedule">
+      <EntityTypeMapping TypeName="GProyModel.Schedule">
+        <MappingFragment StoreEntitySet="Schedule">
+          <ScalarProperty Name="stageId" ColumnName="stageId" />
+          <ScalarProperty Name="nDays" ColumnName="nDays" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="projSupId" ColumnName="projSupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service">
+      <EntityTypeMapping TypeName="GProyModel.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="globalServiceId" ColumnName="globalServiceId" />
+          <ScalarProperty Name="rateId" ColumnName="rateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialist">
+      <EntityTypeMapping TypeName="GProyModel.Specialist">
+        <MappingFragment StoreEntitySet="Specialist">
+          <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="areaId" ColumnName="areaId" />
+          <ScalarProperty Name="ci" ColumnName="ci" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stage">
+      <EntityTypeMapping TypeName="GProyModel.Stage">
+        <MappingFragment StoreEntitySet="Stage">
+          <ScalarProperty Name="stageId" ColumnName="stageId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+          <ScalarProperty Name="orden" ColumnName="orden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="State">
+      <EntityTypeMapping TypeName="GProyModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StateC">
+      <EntityTypeMapping TypeName="GProyModel.StateC">
+        <MappingFragment StoreEntitySet="StateC">
+          <ScalarProperty Name="stateCId" ColumnName="stateCId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StateContract">
+      <EntityTypeMapping TypeName="GProyModel.StateContract">
+        <MappingFragment StoreEntitySet="StateContract">
+          <ScalarProperty Name="stateCId" ColumnName="stateCId" />
+          <ScalarProperty Name="contractId" ColumnName="contractId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StateCSupplement">
+      <EntityTypeMapping TypeName="GProyModel.StateCSupplement">
+        <MappingFragment StoreEntitySet="StateCSupplement">
+          <ScalarProperty Name="stateCId" ColumnName="stateCId" />
+          <ScalarProperty Name="supplementId" ColumnName="supplementId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supplement">
+      <EntityTypeMapping TypeName="GProyModel.Supplement">
+        <MappingFragment StoreEntitySet="Supplement">
+          <ScalarProperty Name="supplementId" ColumnName="supplementId" />
+          <ScalarProperty Name="number" ColumnName="number" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="contractId" ColumnName="contractId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="nom1" ColumnName="nom1" />
+          <ScalarProperty Name="nom2" ColumnName="nom2" />
+          <ScalarProperty Name="signedClient" ColumnName="signedClient" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+          <ScalarProperty Name="signedProvider" ColumnName="signedProvider" />
+          <ScalarProperty Name="comitteNumber" ColumnName="comitteNumber" />
+          <ScalarProperty Name="comitteDate" ColumnName="comitteDate" />
+          <ScalarProperty Name="expirationDate" ColumnName="expirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplementCurrencyType">
+      <EntityTypeMapping TypeName="GProyModel.SupplementCurrencyType">
+        <MappingFragment StoreEntitySet="SupplementCurrencyType">
+          <ScalarProperty Name="supplementId" ColumnName="supplementId" />
+          <ScalarProperty Name="currencyTypeId" ColumnName="currencyTypeId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="GProyModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Temp">
+      <EntityTypeMapping TypeName="GProyModel.Temp">
+        <MappingFragment StoreEntitySet="Temp">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="GProyModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ContractCurrencyType" TypeName="GProyModel.ContractCurrencyType" StoreEntitySet="ContractCurrencyType">
+      <EndProperty Name="Contract">
+        <ScalarProperty Name="contractId" ColumnName="Contract_contractId" />
+      </EndProperty>
+      <EndProperty Name="CurrencyType">
+        <ScalarProperty Name="currencyTypeId" ColumnName="CurrencyType_currencyTypeId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GProyModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GProyModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GProyModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GProyModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GProyModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GProyModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GProyModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GProyModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GProyModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GProyOficial.Models.AccountBank>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cuentas Bancarias</h2>
+
+@section clients{
+    <li>
+        @Html.ActionLink("Clientes", "Index", "Clients", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Bancos", "Index", "Banks", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Tipo de Modena", "Index", "CurrencyTypes", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Cuentas Bancarias", "Index", "AccountBanks", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Contratos", "Index", "Contracts", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Contratos Suplementarios", "Index", "Supplements", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Cronograma", "Index", "Schedules", null, new { @class = "format-link" })
+    </li>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Terminar", "Create", "Clients")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.accountBank1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bank.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.titular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrencyType.type)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.accountBank1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bank.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.titular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrencyType.type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |
+            @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
+            @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})
+        </td>
+    </tr>
+}
+
+
+</table>

@@ -1,0 +1,136 @@
+@model GProyOficial.Models.Contract
+
+@{
+    ViewBag.Title = "Eliminar Registro";
+}
+
+
+
+<label class="alert alert-danger">Cancelar un contrato lo desactivara y no podran crearse nuevos suplementos.Esta acci&oacute;n no se puede desahacer</label>
+<div>
+    
+    <hr />
+ 
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.number)-->Número
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.signedProvider)-->Firma del proveedor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.signedProvider)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.expirationDate)-->Fecha de expiración
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expirationDate)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.Client.name)-->Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.name)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.signedClient)-->Firma del cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.signedClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom2)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.description)-->Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            <label class="control-label">Estado</label>
+        </dt>
+
+        <dd>
+            @foreach (var item in ViewBag.stateC)
+            {
+                if (item.stateCId == @ViewBag.stateContract.stateCId)
+                {
+                    @item.name
+                }
+            }
+        </dd>
+
+        <dt>
+
+        </dt>
+
+        <dd>
+            @ViewBag.stateContract.date
+        </dd>
+
+        <dt>
+
+        </dt>
+
+        <dd>
+            @ViewBag.stateContract.description
+            <input type="text" required="" id="descriptionState" name="descriptionState" class="form-control" placeholder="Razon de la Cancelación">
+        </dd>
+
+        <dt>
+            <!-- @Html.DisplayNameFor(model => model.comitteNumber)-->Número de acuerdo del comité
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comitteNumber)
+        </dd>
+
+        <dt>
+            <!-- @Html.DisplayNameFor(model => model.comitteDate)-->Fecha del comité
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comitteDate)
+        </dd>
+
+    </dl>
+        <div class="form-actions no-color">
+            @Html.ActionLink("Cancelar", "Index", "ClientContract", new { id = @Model.clientId }, new { @class = "btn btn-danger btn-sm" })
+            <input type="submit" value="Aceptar" class="btn btn-default btn-sm" /> 
+           
+        </div>
+    }
+</div>

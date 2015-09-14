@@ -1,0 +1,89 @@
+﻿@using System.Security.Claims
+
+@using Microsoft.AspNet.Identity
+@{
+
+
+
+}
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+            </li>
+            @if (User.IsInRole("Administrador"))
+            {
+
+                <li>@Html.ActionLink("Nuevo Usuario", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Roles", "Index", "AspNetRoles", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            }
+
+
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+
+
+}
+
+<ul class="nav navbar-nav navbar-right">
+
+
+    @*<li>@Html.ActionLink("login", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>*@
+
+</ul>
+@if (!Request.IsAuthenticated)
+{
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            @*<h3 class="form-title">Login to your account</h3>*@
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                    Entre su Usuario y Contraseña.
+                </span>
+            </div>
+            
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">Usuario</label>
+    <div class="input-icon nav navbar-nav navbar-left">
+        <i class="fa fa-user"></i>
+        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Usuario" id="UserName" name="UserName" />
+    </div>
+
+
+                <label class="control-label visible-ie8 visible-ie9">Contrase&ntilde;a</label>
+    <div class="input-icon nav navbar-nav navbar-left">
+        <i class="fa fa-lock"></i>
+        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" id="Password" name="Password" />
+    </div>
+    <label class="checkbox nav navbar-nav navbar-left">
+      <input type="checkbox" id="RememberMe" name="RememberMe" value="true" style="margin-left: 10px" title="Recordar"/>
+    </label>
+
+    <div class="form-actions nav navbar-nav navbar-right">
+
+        <button type="submit" class="btn green">
+            Entrar <i class="m-icon-swapright m-icon-white"></i>
+        </button>
+    </div>
+
+
+
+        }
+    </div>
+}
+

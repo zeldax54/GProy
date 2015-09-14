@@ -1,0 +1,131 @@
+﻿@model GProyOficial.Models.Contract
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h3>Detalles</h3>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           <!--@Html.DisplayNameFor(model => model.number)-->Número
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.signedProvider)-->Firma del proveedor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.signedProvider)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.expirationDate)-->Fecha de expiración
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expirationDate)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.Client.name)-->Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.name)
+        </dd>
+
+        <dt>
+           <!--@Html.DisplayNameFor(model => model.signedClient)-->Firma del cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.signedClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom2)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.description)-->Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            <label class="control-label">Estado</label>
+        </dt>
+
+        <dd>
+            @foreach (var item in ViewBag.stateC)
+            {
+                if (item.stateCId == @ViewBag.stateContract.stateCId)
+                {
+                    @item.name
+                }
+            }
+        </dd>
+
+        <dt>
+
+        </dt>
+
+        <dd>
+            @ViewBag.stateContract.date
+        </dd>
+
+        <dt>
+
+        </dt>
+
+        <dd>
+            @ViewBag.stateContract.description
+        </dd>
+    
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.comitteNumber)-->Número de acuerdo del comité
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comitteNumber)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.comitteDate)-->Fecha del comité
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comitteDate)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-success btn-sm" })
+    @Html.ActionLink("Editar", "Edit", new { id = Model.contractId }, new { @class="btn btn-info btn-sm"}) 
+   
+</p>

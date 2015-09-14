@@ -1,0 +1,104 @@
+﻿@model GProyOficial.Models.Contract
+
+@{
+    ViewBag.Title = "Eliminar Registro";
+}
+
+
+
+<h3>Está seguro de que desea eliminar este registro?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.number)-->Número
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.signedProvider)-->Firma del proveedor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.signedProvider)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom2)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.description)-->Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.expirationDate)-->Fecha de expiración
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expirationDate)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.signedClient)-->Firma del cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.signedClient)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.comitteNumber)-->Número de acuerdo del comité
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comitteNumber)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.comitteDate)-->Fecha del comité
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comitteDate)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.Client.name)-->Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Cancelar", "Index", new { id = Model.clientId }, new { @class = "btn btn-danger btn-sm" })
+            <input type="submit" value="Aceptar" class="btn btn-default btn-sm" /> 
+        </div>
+    }
+</div>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<GProyOficial.Models.Project>
+
+@{
+    ViewBag.Title = "Proyectos";
+}
+
+
+
+<p>
+    @Html.ActionLink("Crear", "Create", null, new {@class = "btn btn-primary btn-sm"})
+</p>
+
+
+<div class="portlet box grey-cascade">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-user"></i>Proyectos
+        </div>
+      
+    </div>
+    <div class="portlet-body">
+        <table class="table table-striped table-bordered table-hover" id="sample_2">
+            <thead>
+            <tr> <th>
+            <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </th>
+                <th>
+                    <!--@Html.DisplayNameFor(model => model.advancePercent)-->% de avance
+                </th>
+                <th>Estado</th>
+        <!--<th>
+           @Html.DisplayNameFor(model => model.startDate)Fecha de inicio
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endDateEstimate)Fecha de fin estimada
+        </th>-->
+        <th>
+            <!--@Html.DisplayNameFor(model => model.totalContracted)-->Total contratado
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.totalnvoiced)-->Total facturado
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.toInvoiced)-->Por facturar
+        </th>
+        <!--<th>
+            @Html.DisplayNameFor(model => model.modulequantity_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.complexity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.plannedhours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.executedhours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.chronogramDeviation)
+        </th>
+        <!--<th>
+            @Html.DisplayNameFor(model => model.observation)
+        </th>-->
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Client.name)-->Cliente
+        </th>
+        <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+             @foreach (var item in Model)
+             {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.advancePercent)
+                    </td>
+                    @{
+                 string estado = item.ProjectState.First(x => x.state && x.projectId == @item.projectId).State1.name;
+                 int idestado = item.ProjectState.First(x => x.state && x.projectId == @item.projectId).State1.stateId;
+                 if (idestado == 2)
+                 {
+                    <td class="success">@estado</td>
+                 }
+                 if (idestado == 3)
+                 {
+                    <td class="warning">@estado</td>
+                 }
+                 if (idestado == 4)
+                 {
+                    <td class="danger">@estado</td>
+                 }
+}
+                   
+                    <!--<td>
+                        @Html.DisplayFor(modelItem => item.startDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.endDateEstimate)
+                    </td>-->
+                    <td>
+                        @Html.DisplayFor(modelItem => item.totalContracted)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.totalnvoiced)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.toInvoiced)
+                    </td>
+                    <!--<td>
+                        @Html.DisplayFor(modelItem => item.modulequantity_)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.complexity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.plannedhours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.executedhours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.chronogramDeviation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.observation)
+                    </td>-->
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.name)
+                    </td>
+                    <td>
+                        <!--@Html.ActionLink("Edit", "Edit", new { id=item.projectId }) -->
+                        <a href="@Url.Action("Edit", "Projects", new { id = item.projectId })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a>|
+                        <!--@Html.ActionLink("Details", "Details", new { id=item.projectId })-->
+                        <a href="@Url.Action("Details", "Projects", new { id = item.projectId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+                        <!--@Html.ActionLink("Delete", "Delete", new { id=item.projectId })-->
+                        <a href="@Url.Action("Delete", "Projects", new { id = item.projectId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+                    </td>
+                </tr>
+             }
+            </tbody>
+        </table>
+    </div>
+</div>

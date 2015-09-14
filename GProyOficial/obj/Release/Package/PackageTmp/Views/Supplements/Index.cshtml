@@ -1,0 +1,81 @@
+﻿@model GProyOficial.Models.ViewModel.SupplementList
+
+@{
+    ViewBag.Title = "Suplementos";
+}
+
+<h3>Suplementos</h3>
+
+<p>
+    @Html.ActionLink("Crear", "Create", new { id = Model.ContractId, idclient = Model.IsClient }, new { @class="btn btn-primary btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Supplement.number)-->Número
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Supplement.name)-->Nombre
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Supplement.amount)-->Monto
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Supplement.Contract.number)-->Número de contrato
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Supplement.Product.name)-->Producto
+        </th>
+        <th>
+           <!--@Html.DisplayNameFor(model => model.Supplement.Service.name)-->Servicio
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Supplements)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contract.number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service.name)
+            </td>
+            <td>
+                
+                <!--@Html.ActionLink("Edit", "Edit", new {id = item.supplementId})-->
+                <a href="@Url.Action("Edit", "Supplements", new { id = item.supplementId, idclient = Model.IsClient })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+                <!--@Html.ActionLink("Details", "Details", new {id = item.supplementId})-->
+                <a href="@Url.Action("Details", "Supplements", new { id = item.supplementId, idclient = Model.IsClient })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a> |
+                <!--@Html.ActionLink("Delete", "Delete", new {id = item.supplementId})-->
+                <a href="@Url.Action("Delete", "Supplements", new { id = item.supplementId, idclient = Model.IsClient })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+               
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (Model.IsClient)
+{
+    @Html.ActionLink("Volver", "Index", "ClientContract", new { id = Model.ClientId}, new { @class = "btn btn-success btn-sm" })
+}
+else
+{
+    @Html.ActionLink("Volver", "Index", "Contracts", null, new { @class = "btn btn-success btn-sm" })
+}
+
+        
+  

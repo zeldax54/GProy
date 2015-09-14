@@ -1,0 +1,200 @@
+﻿@model GProyOficial.Models.Contract
+
+@{
+    ViewBag.Title = "Editar Contrato";
+}
+@functions
+{
+
+    private string Convert(string x)
+    {
+        if (x == "")
+            return "";
+        else
+        {
+            return DateTime.Parse(x).ToShortDateString();
+        }
+    }
+
+}
+<h3>Editar Contrato</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.contractId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.number, "Número", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.signedProvider, "Firma del proveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="text" class="form-control" id="signedProvider" name="signedProvider" required="required" value="@Convert(Model.signedProvider.ToShortDateString())">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.expirationDate, "Fecha de expiración", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="text" class="form-control" id="expirationDate" name="expirationDate" required="required" value="@Model.expirationDate.ToShortDateString()">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Cliente</label>
+            <div class="col-md-10">
+                <select class="form-control input-large select2me" id="idClient" name="idClient" placeholder="Seleccione un Cliente" required="">
+                    <option value=""></option>
+                    @foreach (var item in ViewBag.clientId)
+                    {
+
+                        if (item.clientId == Model.clientId)
+                        {
+                            <option value=@item.clientId selected="selected">@item.name</option>
+                            break;
+                        }
+                       
+                    }
+                </select>
+            </div>
+        </div>
+           
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.signedClient, "Firma del cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="text" class="form-control" id="signedClient" name="signedClient"  value="@Convert(Model.signedClient.ToString())">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, "Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                <select class="form-control valid" id="stateC" name="stateC">
+                    @foreach (var item in ViewBag.stateC)
+                    {
+                        if (item.stateCId == @ViewBag.stateContract.stateCId)
+                        {
+                            <option value=@item.stateCId selected="selected">@item.name</option>
+                        }
+                        else
+                        {
+                            if (item.stateCId != 9)
+                            {
+                                <option value=@item.stateCId>@item.name</option>
+                            }
+
+                        }
+                    }
+                </select>
+                <div>
+                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                        <input type="text" class="form-control" id="dateState"  name="dateState" required="required" value="@ViewBag.stateContract.date.ToShortDateString()">
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <textarea class="form-control" rows="3" id="descriptionState" required="" name="descriptionState">@ViewBag.stateContract.description</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comitteNumber, "Número de acuerdo del comité", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comitteNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comitteNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comitteDate, "Fecha de comité", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="text" class="form-control" id="comitteDate" name="comitteDate" required="required" value="@Convert(Model.comitteDate.ToString())">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               
+            </div>
+            @Html.ActionLink("Cancelar", "Index","ClientContract",new {id = @Model.clientId}, new { @class = "btn btn-danger btn-sm" }) <input type="submit" value="Aceptar" class="btn btn-default btn-sm" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site.js")
+}
+
+
+
+
+
+
+
+
+
+
+
+

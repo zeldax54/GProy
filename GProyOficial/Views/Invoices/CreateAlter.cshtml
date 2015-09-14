@@ -1,0 +1,118 @@
+﻿@using GProyOficial.Models
+@model GProyOficial.Models.Invoice
+
+@{
+    ViewBag.Title = "CreateAlter";
+    Layout = null;
+}
+
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Factura</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.clientId, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="label-primary">@ViewBag.clientId.name</label>
+                <input type="text" name="clientId" value="@ViewBag.clientId.clientId">
+                @Html.ValidationMessageFor(model => model.clientId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount,"Monto posible", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="amount" value="@ViewBag.ammount" readonly="readonly" id="amount">
+                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="label-primary">@ViewBag.productId.name</label>
+                <input type="text" name="productId" value="@ViewBag.productId.productId" hidden="">
+                @Html.ValidationMessageFor(model => model.productId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.date,"Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="datetime" name="date" value="@DateTime.Now.ToShortDateString()" readonly="readonly" id="fecha">
+                @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.state,"Estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="state" id="state"value="@ViewBag.state.name" readonly="readonly">
+                <input type="text" name="stateid" id="stateid" value="@ViewBag.state.stateId" readonly="readonly" hidden="">
+                @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.invoiceNum,"Numero", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <input type="text" name="numf" id="numf" value="0000" disabled="" >
+                @Html.ValidationMessageFor(model => model.invoiceNum, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        @if (ViewBag.spec != null)
+        {
+            <input type="text" id="iddetalle" value="@ViewBag.spec[0].projectDetailsId" hidden="">
+            <table>
+                <tr><th></th><th>Especialista</th><th>Porciento de Participación</th><th>Monto</th></tr>
+                @foreach (ProjectDetailsSpecialist specialist in ViewBag.spec)
+                {
+                    <tr>
+                       
+                        <td><input type="text" name="projDetailsSpecialistId" id="projDetailsSpecialistId" value="@specialist.projDetailsSpecialistId" hidden=""/></td>
+                        <td><label>@specialist.ProjSpecialist.Specialist.name</label></td>
+                        <td>
+                            <div style="text-align: center;">
+                                <label>@specialist.participationPercent</label>
+                            </div>
+                        </td>
+                        <td> <input type="text" name="valosfact" id="valosfact" value="0"></td>
+
+                    </tr>
+                }
+            </table>
+        }
+
+
+
+        @if (ViewBag.error == null)
+        {
+            <label>Fase: @ViewBag.spec[0].ProjectDetails.Stage.name</label>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Facturar" class="btn btn-default" id="facturar" data-placement="right" />
+                </div>
+            </div>
+        }
+        else
+        {
+          <div class="alert-danger">@ViewBag.error</div>
+        }
+        
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Content/Site.js")
+}

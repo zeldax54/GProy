@@ -1,0 +1,432 @@
+﻿@model GProyOficial.Models.Client
+@using GProyOficial.Models
+
+@{
+    ViewBag.Title = "Editar Cliente";
+    AccountBank accountBank = new AccountBank();
+}
+
+<h3>Editar Cliente</h3>
+
+@section clients{
+    <li>
+        @Html.ActionLink("Clientes", "Index", "Clients", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Bancos", "Index", "Banks", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Tipo de Modena", "Index", "CurrencyTypes", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Cuentas Bancarias", "Index", "AccountBanks", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Contratos", "Index", "Contracts", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Contratos Suplementarios", "Index", "Supplements", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Cronograma", "Index", "Schedules", null, new { @class = "format-link" })
+    </li>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+    <hr/>
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    @Html.HiddenFor(model => model.clientId)
+
+    <div class="form-group">
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <table class="form-group">
+                        <tr>
+                            <td style="width: 25%">
+                                @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.name, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.name, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.identifAbrev, "Abreviatura", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.identifAbrev, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.identifAbrev, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.organismId, "Organismo", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.DropDownList("organismId", null, htmlAttributes: new {@class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.organismId, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.reup, "Código Reup", htmlAttributes: new {@class = "control-label col-md-2", style = "width: 150px ; text-align: left;"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.reup, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.reup, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.legalPerson, "Personalidad Jurídica", htmlAttributes: new {@class = "control-label col-md-2", style = "width: 150px ; text-align: left;"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.CheckBoxFor(model => model.legalPerson)
+                                    @Html.ValidationMessageFor(model => model.legalPerson, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td>
+                    <table class="form-group">
+                        <tr>
+                            <td style="width: 25%">
+                                @Html.LabelFor(model => model.agent, "Representante", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.agent, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.agent, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.agentPosition, "Cargo Representante", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.agentPosition, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.agentPosition, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.telephone, "Teléfono", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.telephone, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.telephone, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.email, "Correo", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.email, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.email, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.dateCreation, "Día de Creación", htmlAttributes: new {@class = "control-label col-md-2"})
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.dateCreation, new {htmlAttributes = new {@class = "form-control", required = "true"}})
+                                    @Html.ValidationMessageFor(model => model.dateCreation, "", new {@class = "text-danger"})
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-group" style="width: 30%"></div>
+
+    <div class="form-group">
+        <table class="form-group">
+            <tr>
+                <td style="border-right: 1px solid #000000;">
+                    <label class="control-label col-md-2">Dirección</label>
+                </td>
+                <td>
+                    <table class="form-group">
+                        <tr>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.street, new {htmlAttributes = new {@class = "form-control", placeholder = "Calle"}})
+                                @Html.ValidationMessageFor(model => model.street, "", new {@class = "text-danger"})
+                            </div>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.city, new {htmlAttributes = new {@class = "form-control", placeholder = "Municipio"}})
+                                @Html.ValidationMessageFor(model => model.city, "", new {@class = "text-danger"})
+                            </div>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.province, new {htmlAttributes = new {@class = "form-control", placeholder = "Provincia"}})
+                                @Html.ValidationMessageFor(model => model.province, "", new {@class = "text-danger"})
+                            </div>
+                        </tr>
+                        <tr style="height: 8px"></tr>
+                        <tr>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.country, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "País"}})
+                                @Html.ValidationMessageFor(model => model.country, "", new {@class = "text-danger"})
+                            </div>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.isSubject, "Subordinada a alguna empresa?", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <div class="checkbox" id="checkBoxSubject">
+                    @Html.CheckBoxFor(model => model.isSubject, htmlAttributes: new {@id = "client_isSubject"})
+                    @Html.ValidationMessageFor(model => model.isSubject, "", new {@class = "text-danger"})
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" id="checkBoxFather" style="display: none">
+            <label class="control-label col-md-2">Empresa</label>
+            <div class="col-md-10">
+                <select class="form-control valid" id="clientFather" name="clientFather">
+                    @foreach (var item in ViewBag.fatherId)
+                    {
+                        if (item.clientId == Model.fatherId)
+                        {
+                            <option value=@item.clientId selected="selected">@item.name</option>
+                        }
+                        else
+                        {
+                            <option value=@item.clientId>@item.name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div>
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#home">Cuentas Bancarias</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <table class="table table-bordered" id="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                Número de cuenta
+                            </th>
+                            <th>
+                                Nombre del banco
+                            </th>
+                            <th hidden="hidden">
+                                Id del banco
+                            </th>
+                            <th>
+                                Tipo de cuenta
+                            </th>
+                            <th hidden="hidden">
+                                Id de cuenta
+                            </th>
+                            <th>
+                                Nombre del propietario de la cuenta
+                            </th>
+                            <th style="width: 22px">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.AccountBank)
+                        {
+                            <tr>
+                                <td>
+                                    @item.accountNumber
+                                </td>
+                                <td>
+                                    @item.Bank.name
+                                </td>
+                                <td hidden="hidden">
+                                    @item.bankId
+                                </td>
+                                <td>
+                                    @item.CurrencyType.type
+                                </td>
+                                <td hidden="hidden">
+                                    @item.currencyTypeId
+                                </td>
+                                <td>
+                                    @item.titular
+                                </td>
+                                <td>
+                                    <input type="image" src="../../Content/images/trash.png" id="deleteRow">
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4">
+                <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-sm">Adicionar Cuenta</a>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <input type="text" name="jsonData" id="jsonData" hidden="hidden"/>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               
+
+            </div>
+        </div>
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-sm" })
+        <input type="submit" value="Aceptar" class="btn btn-default btn-sm" id="createClient" />
+    </div>
+</div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cuenta Bancaria</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-horizontal">
+                        <hr/>
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                        <div class="form-group">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        <table class="form-group">
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    @Html.LabelFor(model => @accountBank.accountNumber, "Número de cuenta", htmlAttributes: new {@class = "control-label col-md-2"})
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => @accountBank.accountNumber, new {htmlAttributes = new {@class = "form-control", @id = "accountBankaccountBank1"}})
+                                                        @Html.ValidationMessageFor(model => @accountBank.accountNumber, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    @Html.LabelFor(model => @accountBank.bankId, "Banco", htmlAttributes: new {@class = "control-label col-md-2"})
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-10">
+                                                        @Html.DropDownList("bankId", null, htmlAttributes: new {@class = "form-control", @id = "accountBankbankId"})
+                                                        @Html.ValidationMessageFor(model => @accountBank.bankId, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="form-group">
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    @Html.LabelFor(model => @accountBank.currencyTypeId, "Tipo de moneda", htmlAttributes: new {@class = "control-label col-md-2"})
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-10">
+                                                        @Html.DropDownList("currencyTypeId", null, htmlAttributes: new {@class = "form-control", @id = "accountBankcurrencyTypeId"})
+                                                        @Html.ValidationMessageFor(model => @accountBank.currencyTypeId, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    @Html.LabelFor(model => @accountBank.titular, "Titular", htmlAttributes: new {@class = "control-label col-md-2"})
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => @accountBank.titular, new {htmlAttributes = new {@class = "form-control", @id = "accountBanktitular"}})
+                                                        @Html.ValidationMessageFor(model => @accountBank.titular, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" id="create">Aceptar</button>
+                    </div>
+                </div>
+                <!-- /.modal-body -->
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site.js")
+}

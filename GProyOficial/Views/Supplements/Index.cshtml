@@ -1,0 +1,162 @@
+﻿@using GProyOficial.Models
+@model GProyOficial.Models.ViewModel.SupplementList
+
+@{
+    
+    ViewBag.Title = "Suplementos";
+    var dc = new GProyEntities();
+}
+@functions
+{
+
+ 
+
+    private double Monto(int idsup)
+    {
+        GProyEntities dc = new GProyEntities();
+        Supplement s = dc.Supplement.Find(idsup);
+        return s.ProjSup.Sum(z => z.ProjectDetails.Sum(ss => ss.totalInvoiced));
+    }
+
+}
+
+<h4>Suplementos Cliente: @ViewBag.nombc Contrato No: @Model.Supplements.First().Contract.number</h4>
+
+@{
+    Contract c = dc.Contract.Find(Model.ContractId);
+    if (c.StateContract.First(p => p.state).stateCId == 3)
+    {
+        <label class="alert alert-danger">Este Contrato esta detenido no se pueden crear suplementos</label>
+    }
+    if (c.expirationDate <= DateTime.Now)
+    {
+        <label class="alert alert-danger">Este Contrato esta vencido</label>
+    }
+    if (c.StateContract.First(p => p.state).stateCId == 1)
+    {
+        <p>
+            @Html.ActionLink("Crear", "Create", new {id = Model.ContractId, idclient = Model.IsClient}, new {@class = "btn btn-primary btn-sm"})
+        </p>
+    }
+}
+
+
+<table class="table table-striped table-bordered table-hover" id="sample_2">
+    <thead>
+    <tr>
+        <th>
+            Número
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            Monto
+        </th>
+        <th>
+            Facturado
+        </th>
+        <th>
+            Producto
+        </th>
+        <th>
+           Servicio
+        </th>
+        <th>Proyecto(s)</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Supplements)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                @if (item.StateCSupplement.First(x => x.state).StateC.stateCId==6)
+                {
+                    <td class="warning">
+                        @Html.DisplayFor(modelItem => item.StateCSupplement.First(x=>x.state).StateC.name)
+                    </td>
+                }
+                @if (item.StateCSupplement.First(x => x.state).StateC.stateCId == 7)
+                {
+                    <td class="danger">
+                        @Html.DisplayFor(modelItem => item.StateCSupplement.First(x => x.state).StateC.name)
+                    </td>
+                }
+               @if (item.StateCSupplement.First(x => x.state).StateC.stateCId == 5)
+               {
+                    <td class="success">
+                        @Html.DisplayFor(modelItem => item.StateCSupplement.First(x => x.state).StateC.name)
+                    </td>
+                }
+                @if (item.StateCSupplement.First(x => x.state).StateC.stateCId == 10)
+                {
+                    <td style="background:cadetblue">
+                        @Html.DisplayFor(modelItem => item.StateCSupplement.First(x => x.state).StateC.name)
+                    </td>
+                }
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    <span>@Monto(int.Parse(@item.supplementId.ToString()))</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Service.name)
+                </td>
+                <td>
+                    @{
+                        foreach (var s in item.ProjSup)
+                        {
+                            <a href="@Url.Action("Index", "Projects", new {idp = s.Project.projectId})" title="Cliente:@s.Project.Client.name Proyecto:@s.Project.name "><span class="fa fa-group"></span></a>
+                        }
+                    }
+
+                </td>
+@if (item.StateCSupplement.First(x => x.state).StateC.stateCId == 7 || item.StateCSupplement.First(x => x.state).StateC.stateCId == 10)
+{<td>
+    <a href="@Url.Action("Details", "Supplements", new {id = item.supplementId, idclient = Model.IsClient})" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles"/> </a>
+</td>
+}
+else
+{
+    <td>
+
+
+        <a href="@Url.Action("Edit", "Supplements", new {id = item.supplementId, idclient = Model.IsClient})" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+
+        <a href="@Url.Action("Details", "Supplements", new {id = item.supplementId, idclient = Model.IsClient})" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a> |
+
+        <a href="@Url.Action("Delete", "Supplements", new {id = item.supplementId, idclient = Model.IsClient})" id="prueba"><span class="fa fa-trash-o"></span> </a>
+
+
+
+    </td>
+}
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+@(Html.ActionLink("Volver", "Index", "ClientContract", new {id = Model.Supplements.First().Contract.Client.clientId}, new {@class = "btn btn-success btn-sm"}))
+
+        @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site.js")
+        }
+
+
+  

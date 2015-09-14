@@ -1,0 +1,56 @@
+﻿@model GProyOficial.Models.Entity
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+
+
+<h3>Esta seguro de que desea eliminar este registro?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.reupCode)-->Codigo Reup
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reupCode)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.identifAbrev)-->Identificador
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.identifAbrev)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.Organism.name)-->Organismo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organism.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-sm" }) <input type="submit" value="Aceptar" class="btn btn-default" /> 
+           
+        </div>
+    }
+</div>

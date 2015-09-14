@@ -1,0 +1,90 @@
+﻿@model IEnumerable<GProyOficial.Models.Bank>
+
+@{
+    ViewBag.Title = "Bancos";
+}
+
+@section clients{
+    <li>
+        @Html.ActionLink("Clientes", "Index", "Clients", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Bancos", "Index", "Banks", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Tipo de Modena", "Index", "CurrencyTypes", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Cuentas Bancarias", "Index", "AccountBanks", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Contratos", "Index", "Contracts", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Contratos Suplementarios", "Index", "Supplements", null, new { @class = "format-link" })
+    </li>
+    <li>
+        @Html.ActionLink("Cronograma", "Index", "Schedules", null, new { @class = "format-link" })
+    </li>
+}
+
+<h3>Bancos</h3>
+
+<p>
+    @Html.ActionLink("Crear", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.branch)-->Sucursal
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.street)-->Dirección
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.city)-->Ciudad
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.province)-->Provincia
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.country)-->País
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.branch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.province)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country)
+        </td>
+        <td>
+            <!--@Html.ActionLink("Edit", "Edit", new { id=item.bankId })--> 
+            <a href="@Url.Action("Edit", "Banks", new { id = item.bankId })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a>|
+            <!--@Html.ActionLink("Details", "Details", new { id=item.bankId }) -->
+            <a href="@Url.Action("Details", "Banks", new { id = item.bankId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+            <!--@Html.ActionLink("Delete", "Delete", new { id=item.bankId })-->
+            <a href="@Url.Action("Delete", "Banks", new { id = item.bankId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+        </td>
+    </tr>
+}
+
+</table>

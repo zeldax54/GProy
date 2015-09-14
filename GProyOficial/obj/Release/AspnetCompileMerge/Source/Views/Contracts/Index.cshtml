@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GProyOficial.Models.Contract>
+
+@{
+    ViewBag.Title = "Contratos";
+}
+
+<h3>Contratos</h3>
+
+<p>
+    @Html.ActionLink("Crear", "Create", null, new {@class = "btn btn-primary btn-sm"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.number)-->Número
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.signedProvider)-->Firma del proveedor
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.expirationDate)-->Fecha de expiración
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Client.name)-->Cliente
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.signedProvider)
+        </td>
+       <td>
+            @Html.DisplayFor(modelItem => item.expirationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.name)
+        </td>
+        <td>
+           <!-- @Html.ActionLink("Edit", "Edit", new { id=item.contractId })-->
+            <a href="@Url.Action("Edit", "Contracts", new { id = item.contractId })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+            <!--@Html.ActionLink("Details", "Details", new { id=item.contractId })--> 
+            <a href="@Url.Action("Details", "Contracts", new { id = item.contractId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+            <!--@Html.ActionLink("Delete", "Delete", new {id = item.contractId})-->
+            <a href="@Url.Action("Delete", "Contracts", new { id = item.contractId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+            @Html.ActionLink("Suplementos", "Index", "Supplements", new { id = item.contractId, idclient = false }, null)
+        </td>
+    </tr>
+}
+
+</table>

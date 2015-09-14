@@ -1,0 +1,59 @@
+﻿
+
+
+
+<body class="login">
+    <!-- BEGIN LOGO -->
+  
+    <!-- END LOGO -->
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <!-- END SIDEBAR TOGGLER BUTTON -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+ 
+        @*<h3 class="form-title">Login to your account</h3>*@
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            <span>
+                    Entre su Usuario y Contraseña.
+                </span>
+        </div>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Usuario</label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Usuario" id="UserName" name="UserName"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Contrase&ntilde;a</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" id="Password" name="Password"/>
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" id="RememberMe" name="RememberMe" value="true" style="margin-left: 10px"/> Recordarme
+            </label>
+        </div>
+        <div class="form-actions">
+          
+            <button type="submit" class="btn green">
+                Entrar <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+
+   
+
+}
+        </div>
+
+</body>
+

@@ -1,0 +1,92 @@
+﻿
+@model GProyOficial.Models.ViewModel.ContractList
+@{
+    ViewBag.Title = "Contratos";
+}
+
+<h4>Contratos Cliente: @Model.Contracts.First().Client.name</h4>
+
+<p>
+    @Html.ActionLink("Crear", "Create", new { id = Model.ClientId }, new { @class = "btn btn-primary btn-sm" })
+</p>
+<table class="table table-hover" id="tablecontrat1">
+    <thead>
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.number)-->Número
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.signedProvider)-->Firma del proveedor
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.expirationDate)-->Fecha de expiración
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.Client.name)-->Cliente
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Contract.StateContract)-->Estado
+        </th>
+        <th></th>
+    </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contracts)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.signedProvider)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.expirationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.name)
+                </td>
+                @if (item.StateContract.First(s => s.contractId == item.contractId && s.state).StateC.stateCId==1)
+                {
+                 <td class="success">
+                    @Html.DisplayFor(modelItem => item.StateContract.First(s => s.contractId == item.contractId && s.state).StateC.name)
+                </td>
+                }
+                @if (item.StateContract.First(s => s.contractId == item.contractId && s.state).StateC.stateCId == 3)
+                {
+                    <td class="warning">
+                        @Html.DisplayFor(modelItem => item.StateContract.First(s => s.contractId == item.contractId && s.state).StateC.name)
+                    </td>
+                }
+                @if (item.StateContract.First(s => s.contractId == item.contractId && s.state).StateC.stateCId == 9)
+                {
+                    <td class="danger">
+                        @Html.DisplayFor(modelItem => item.StateContract.First(s => s.contractId == item.contractId && s.state).StateC.name)
+                    </td>
+                }
+               
+               
+                <td>
+                    <!-- @Html.ActionLink("Edit", "Edit", new {id = item.contractId})-->
+                    <a href="@Url.Action("Edit", "Contracts", new {id = item.contractId})" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+                    <!--@Html.ActionLink("Details", "Details", new {id = item.contractId})-->
+                    <a href="@Url.Action("Details", "Contracts", new {id = item.contractId})" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+                    <!--@Html.ActionLink("Delete", "Delete", new {id = item.contractId})-->
+                    <a href="@Url.Action("Delete", "Contracts", new {id = item.contractId})" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+                    @Html.ActionLink("Suplementos", "Index", "Supplements", new { id = item.contractId, idclient = false }, null)
+               
+                </td>
+
+            </tr>
+        }
+       </tbody>
+</table>
+
+@Html.ActionLink("Volver", "Index", "Clients",null, new { @class = "btn btn-success btn-sm" })
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/site.js")
+    @Scripts.Render("~/Content/Site.js")
+}

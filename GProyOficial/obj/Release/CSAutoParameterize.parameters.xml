@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-GProyOficial-20150224104250.mdf;Initial Catalog=aspnet-GProyOficial-20150224104250;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Desktop\\Projects\\Ultimo\\GProyOficialWork\\GProyOficial\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="GProyEntities-Web.config Connection String" description="GProyEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.GProy.csdl|res://*/Models.GProy.ssdl|res://*/Models.GProy.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=IMP-YOEL;initial catalog=GProy;user id=sa;password=SqlServer123*_;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Desktop\\Projects\\Ultimo\\GProyOficialWork\\GProyOficial\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GProyEntities']/@connectionString" />
+  </parameter>
+</parameters>

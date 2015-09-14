@@ -1,0 +1,225 @@
+﻿@model GProyOficial.Models.Supplement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="form-horizontal">
+    <h4>Supplement</h4>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.number, "Numero", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.number)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.contractId, "Contrato", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="number" name="contractId" value=@ViewBag.contractId id="contractId" hidden="hidden" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.amount, "Monto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.amount)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nom1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.nom1)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nom2, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.nom2)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.signedProvider, "Firma del proveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.signedProvider)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.expirationDate, "Fecha de expiracion", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.expirationDate)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.signedClient, "Firma del cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.signedClient)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.serviceId, "Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Service.name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.productId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Product.name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Estado</label>
+        <div class="col-md-10">
+            <select class="form-control valid" id="stateC" name="stateC" disabled="disabled">
+                @foreach (var item in ViewBag.stateC)
+                {
+                    if (item.stateCId == @ViewBag.stateSupplement.stateCId)
+                    {
+                        <option value=@item.stateCId selected="selected">@item.name</option>
+                    }
+                    else
+                    {
+                        <option value=@item.stateCId>@item.name</option>
+                    }
+                }
+            </select>
+            <input type="date" class="form-control" id="dateState" name="dateState" value=@ViewBag.stateSupplement.date disabled="disabled" />
+            <textarea class="form-control" rows="3" id="descriptionState" name="descriptionState" style="height: 35px" disabled="disabled">@ViewBag.stateSupplement.description</textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.comitteNumber, "Numero de acuerdo del comite", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.comitteNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.comitteDate, "Fecha del comite", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.comitteDate)
+        </div>
+    </div>
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    Clientes <span class="badge" style="background: #fff; color: #428BCA" id="count"><input type="text" disabled="true" value=@ViewBag.clientSup.Count id="pass" style="background: #fff; width: 8px; border: 0;" /></span>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="well well-sm">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tableC">
+                        <thead>
+                            <tr>
+                                <th hidden="hidden">
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th hidden="hidden">
+                                    Teléfono
+                                </th>
+                                <th hidden="hidden">
+                                    Correo
+                                </th>
+                                <th>
+                                    Monto
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.clientSup)
+                            {
+                                <tr>
+                                    <td hidden="hidden" class="clientId">
+                                        @item.Client.clientId
+                                    </td>
+                                    <td class="clientName">
+                                        @item.Client.name
+                                    </td>
+                                    <td hidden="hidden" class="telephone">
+                                        @item.Client.telephone
+                                    </td>
+                                    <td hidden="hidden" class="email">
+                                        @item.Client.email
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control text-box single-line amountValue" required="true" value=@item.amount disabled="disabled" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Cancelar", "Index", "Supplements", new { id = @ViewBag.contractId, idclient = @ViewBag.idclientValue }, new { @class = "btn btn-danger btn-sm" })
+            @Html.ActionLink("Edit", "Edit", new { id = Model.supplementId, idclient = @ViewBag.idclientValue }, new { @class = "btn btn-info btn-sm" })
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

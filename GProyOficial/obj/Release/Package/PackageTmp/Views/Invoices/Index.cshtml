@@ -1,0 +1,77 @@
+﻿@using System.Linq.Expressions
+@using GProyOficial.Models
+@model IEnumerable<GProyOficial.Models.Invoice>
+
+@functions {
+    private string Reformar(DateTime T)
+    {
+        return T.ToShortDateString();
+    }
+
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    
+}
+
+
+<p>
+    <button type="button" class="btn btn-default btn-sm" id="nuevafact">
+        <span class="glyphicon glyphicon-plus"></span>
+    </button>
+</p>
+<input type="text"  value="@ViewBag.iddet" id="iddetalle" hidden="">
+<table class="table">
+    <tr>
+        <th>
+         Monto
+        </th>
+        <th>
+           Fecha
+        </th>
+        <th>
+           Estado
+        </th>
+        <th>
+           Numero
+        </th>
+        <th>
+           Cliente
+        </th>
+        <th>
+          Producto
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+           @item.date.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.invoiceNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.invoiceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.invoiceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.invoiceId })
+        </td>
+    </tr>
+}
+
+</table>

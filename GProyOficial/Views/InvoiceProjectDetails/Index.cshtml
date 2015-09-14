@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GProyOficial.Models.InvoiceProjectDetails>
+
+@{
+    ViewBag.Title = "Facturas";
+}
+
+<h3>Facturas</h3>
+
+<p>
+    @Html.ActionLink("Crear", "Create", null, new { @class="btn btn-primary btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.amount)-->Monto
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Invoice.invoiceNum)-->Número de factura
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectDetailsSpecialist.projDetailsSpecialistId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Invoice.invoiceNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectDetailsSpecialist.projDetailsSpecialistId)
+        </td>
+        <td>
+            <!--@Html.ActionLink("Edit", "Edit", new { id=item.invoiceProjectDetailsId })-->
+            <a href="@Url.Action("Edit", "InvoiceProjectDetails", new { id = item.invoiceProjectDetailsId })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+            <!--@Html.ActionLink("Details", "Details", new { id=item.invoiceProjectDetailsId })-->
+            <a href="@Url.Action("Details", "InvoiceProjectDetails", new { id = item.invoiceProjectDetailsId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a> |
+            <!--@Html.ActionLink("Delete", "Delete", new { id=item.invoiceProjectDetailsId })-->
+            <a href="@Url.Action("Delete", "InvoiceProjectDetails", new { id = item.invoiceProjectDetailsId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+        </td>
+    </tr>
+}
+
+</table>

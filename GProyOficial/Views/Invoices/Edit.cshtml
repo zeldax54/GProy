@@ -1,0 +1,133 @@
+﻿@model GProyOficial.Models.Invoice
+@using System.Linq.Expressions
+@using GProyOficial.Models
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+@functions
+{
+
+    public int SupState()
+    {
+        GProyEntities db = new GProyEntities();
+        ProjectDetails pd = db.ProjectDetails.Find(ViewBag.iddet);
+        StateCSupplement stateCSupplement = db.StateCSupplement.Where(st => st.supplementId == pd.ProjSup.supplementId && st.state).ToList().First();
+        if (stateCSupplement.stateCId == 6 || stateCSupplement.stateCId == 7)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Editar Factura</h4>
+        <hr/>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.invoiceId)
+
+        <input type="text" id="iddetalle" value="@ViewBag.iddet" hidden="">
+        <input type="text" id="idfact" value="@ViewBag.idf" hidden="">
+        <div class="form-group">
+            @Html.LabelFor(model => model.clientId, "Cliente",  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="label-default">@ViewBag.clientId.name</label>
+                <input type="text" name="clientId" value="@ViewBag.clientId.clientId" hidden="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount, "Monto Actual", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <input type="text" name="amount" value="@ViewBag.ammount" readonly="readonly" id="amountact">
+                @Html.ValidationMessageFor(model => model.amount, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount, "Monto Posible", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="amount" value="@ViewBag.posible" readonly="readonly" id="amount">
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="label-default"> @ViewBag.producto</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.date,"Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" value="@ViewBag.fecha.ToShortDateString()" name="fecha" disabled="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.state,"Estado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               <label class="label-default"> @ViewBag.estado</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.invoiceNum,"Numero", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.invoiceNum, new { htmlAttributes = new { @class = "form-control",@readonly="" } })
+                @Html.ValidationMessageFor(model => model.invoiceNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <table>
+            @foreach (var s in ViewBag.espc)
+            {
+                <tr>
+                    <td><input type="text" name="projDetailsSpecialistId" id="projDetailsSpecialistId" value="@s.projDetailsSpecialistId" disabled="" hidden=""/></td>
+                    <td>@s.ProjectDetailsSpecialist.ProjSpecialist.Specialist.name</td>
+                    <td style="width: 20px"></td>
+                    <td><input type="text" value="@s.amount" name="valosfact2" id="valosfact2"/></td>
+                </tr>
+            }
+            @foreach (var q in ViewBag.quedan)
+            {
+                <tr>
+                    <td><input type="text" name="projDetailsSpecialistId" id="projDetailsSpecialistId" value="@q.projDetailsSpecialistId" disabled="" hidden=""/></td>
+                    <td>@q.ProjSpecialist.Specialist.name</td>
+                    <td style="width: 20px"></td>
+                    <td><input type="text" value="0" name="valosfact2" id="valosfact2"/></td>
+                </tr>
+            }
+        </table>
+        @if (SupState() == 1)
+        {
+            <label class="label-danger">No se puede Editar esta Factura. Esta en un suplemento Detenido o Cancelado</label>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Guardar" class="btn btn-default" id="editar_f" data-placement="left" />
+                </div>
+            </div>
+        }
+       
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

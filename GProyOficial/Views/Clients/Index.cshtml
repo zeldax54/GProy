@@ -1,0 +1,83 @@
+﻿@model IEnumerable<GProyOficial.Models.Client>
+
+@{
+    ViewBag.Title = "Clientes";
+}
+@Styles.Render("~/Content/css/tableDetails.css")
+
+
+
+<h3>Clientes</h3>
+
+<p>
+    @Html.ActionLink("Crear", "Create", null, new {@class = "btn btn-primary btn-sm"})
+</p>
+
+
+<table id="tableClientt" class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+            </th>
+            <th>
+                <!--@Html.DisplayNameFor(model => model.Organism.name)-->Organismo
+            </th>
+            <th>
+                <!--@Html.DisplayNameFor(model => model.telephone)-->Teléfono
+            </th>
+            <th>
+                <!--@Html.DisplayNameFor(model => model.email)-->Correo
+            </th>
+            <th>Contratos</th>
+            <th>Proyectos</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td id="tdName">
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td id="tdOrganism">
+                    @Html.DisplayFor(modelItem => item.Organism.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @if (item.legalPerson)
+                    {
+                       
+                        <a href="@Url.Action("Index", "ClientContract", new { id = item.clientId })" id="prueba"><span class="fa fa-file-text-o"></span></a>      
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Index", "Projects", new { idcliente = item.clientId })" id="prueba"><span class="fa fa-group"></span></a>
+                </td>
+                <td>
+                    <!--@Html.ActionLink("Edit", "Edit", new {id = item.clientId})-->
+                    <a href="@Url.Action("Edit", "Clients", new {id = item.clientId})" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+                    <!--@Html.ActionLink("Details", "Details", new {id = item.clientId})-->
+                    <a href="@Url.Action("Details", "Clients", new {id = item.clientId})" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+                    <!--@Html.ActionLink("Delete", "Delete", new {id = item.clientId})-->
+                    <a href="@Url.Action("Delete", "Clients", new {id = item.clientId})" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+                   
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/site.js")
+    @Scripts.Render("~/Content/Site.js")
+}

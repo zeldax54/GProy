@@ -1,0 +1,377 @@
+﻿@using GProyOficial.Models
+@model GProyOficial.Models.Supplement
+
+@{
+    ViewBag.Title = "Nuevo Suplemento";
+}
+
+<h3>Nuevo Suplemento</h3>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.number,"Número",new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.number, new { htmlAttributes = new { @class = "form-control", @required = "required", @title = "Este campo es requerido" } })
+                @Html.ValidationMessageFor(model => model.number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control",  @required = "required", @title = "Este campo es requerido"} })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!--@Html.LabelFor(model => model.contractId, "Contrato", htmlAttributes: new { @class = "control-label col-md-2" })-->
+            <div class="col-md-10">
+                <input type="number" name="contractId" value=@ViewBag.contractId id="contractId" hidden=""/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount, "Monto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.amount, new {  htmlAttributes = new { @class = "form-control", @id = "amountV", @disabled = "true" } })
+                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.signedProvider, "Firma del proveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="date" class="form-control" id="signedProvider" name="signedProvider" required="">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.expirationDate, "Fecha de expiración", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="date" class="form-control" id="expirationDate" name="expirationDate" required="">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.signedClient, "Firma del cliente", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="date" class="form-control" id="signedClient" name="signedClient">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.serviceId, "Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("serviceId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.serviceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("productId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.productId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                <select class="form-control valid" id="stateC" name="stateC" required="true">
+                    @foreach (var item in ViewBag.stateC)
+                    {
+                        <option value=@item.stateCId>@item.name</option>
+                    }
+                </select>
+               
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="date" class="form-control" id="dateState" name="dateState" required="">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+                <textarea title="Este campo es requerido" class="form-control" rows="3" id="descriptionState" name="descriptionState" required="" title="Este campo es requerido"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comitteNumber, "Número de acuerdo del comité", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comitteNumber, new {htmlAttributes = new {@class = "form-control",@required="required",title="Este campo es requerido"}})
+                @Html.ValidationMessageFor(model => model.comitteNumber, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comitteDate, "Fecha del comité", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                    <input type="date" class="form-control" id="comitteDate" name="comitteDate" required="">
+                    <span class="input-group-btn">
+                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+           
+
+        </div>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs" id="asig">Asignar</a>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Clientes <span class="badge" style="background: #fff; color: #428BCA" id="count"><input type="text"  value="0" id="pass" style="background: #fff; width: 8px; border: 0;"/></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="well well-sm">
+                    <div class="table-responsive">
+                        <table class="table" id="tableC">
+                            <thead>
+                            <tr>
+                                <th hidden="hidden">
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th hidden="hidden">
+                                    Teléfono
+                                </th>
+                                <th hidden="hidden">
+                                    Correo
+                                </th>
+                                <th>
+                                    Monto
+                                </th>
+                                <th>
+                                    Proyecto
+                                </th>
+                                <th>
+
+                                </th>
+                                <th hidden="">
+                                    Proyecto ID
+                                </th>
+                              
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <input type="text" id="jsonClient" name="jsonClient" hidden=""/>
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-2" hidden="">
+                @if (ViewBag.idclientValue)
+                {
+                    <input type="checkbox" checked="checked" value="true" name="idclient" hidden/>
+                }
+                else
+                {
+                    <input type="checkbox" value="false" name="idclient" hidden/>
+                }
+            </div>
+            @Html.ActionLink("Cancelar", "Index", "Supplements", new { id = @ViewBag.contractId, idclient = @ViewBag.idclientValue }, new { @class = "btn btn-danger btn-sm" }) <input type="submit" value="Aceptar" class="btn btn-default btn-sm" />
+           
+        </div>
+</div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Clientes</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-horizontal">
+                    <hr/>
+                    <div class="form-group">
+                        <table class="table" id="sample_2">
+                            <thead>
+                            <tr>
+                                <th hidden="">
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>Cantidad</th>
+                               
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td hidden="hidden">
+                                        <span class="clientId">@ViewBag.clientFather.clientId</span>
+                                        </td>
+                                    <td>
+                                        <span id="clientName">@ViewBag.clientFather.name</span>
+                                    </td>
+                                    <td>
+                                        <div class="input-inline input-medium">
+                                            <input class="numdec" type="text" value="0" id="numdec">
+                                        </div>
+                                    </td>
+                                   
+                                    <td>
+                                        <button class="btn btn-sm green" id="sendClient" data-placement="left">
+                                            <span class="glyphicon glyphicon-arrow-down">
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @foreach (var item in ViewBag.clients)
+                            {
+                                <tr>
+                                    <td hidden="hidden">
+                                        <span class="clientId">@item.clientId</span> 
+                                    </td>
+                                    <td>
+                                        <span id="clientName">@item.name</span>
+                                    </td>
+                                    <td>
+                                        <div class="input-inline input-medium">
+                                            <input class="numdec" type="text" value="0" id="numdec">
+                                        </div>
+                                        
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm green" id="sendClient" data-placement="left">
+                                            <span class="glyphicon glyphicon-arrow-down">
+                                            </span>
+                                        </button>
+                                       
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  
+                </div>
+            </div>
+            <!-- /.modal-body -->
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModalP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="titulo"></span>
+                <span id="idprodact" hidden=""></span>
+                <span id="idclientact" hidden=""></span>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-horizontal">
+                    
+                    <div class="form-group">
+                        <table class="table" id="tabP">
+                            <thead>
+                                <tr>
+                                    <th>Nombre Proyecto</th>
+                                    <th>Producto</th>
+                                    <th></th>
+                                    <th hidden="">Id</th>
+                                    <th hidden="">idProd</th>
+
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+            <!-- /.modal-body -->
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div>
+   
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site.js")
+@Scripts.Render("~/Content/Site.js")
+
+
+
+}

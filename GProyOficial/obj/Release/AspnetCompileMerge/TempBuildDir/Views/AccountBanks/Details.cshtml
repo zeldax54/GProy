@@ -1,0 +1,50 @@
+﻿@model GProyOficial.Models.AccountBank
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AccountBank</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bank.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bank.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyType.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyType.type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

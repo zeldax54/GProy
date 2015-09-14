@@ -1,0 +1,67 @@
+﻿@model GProyOficial.Models.Bank
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h3>Detalles</h3>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.branch)-->Sucursal
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.branch)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.street)-->Dirección
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.street)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.city)-->Ciudad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.province)-->Provincia
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.province)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.country)-->País
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver", "Index", null, new {@class="btn btn-success btn-sm" })
+    @Html.ActionLink("Editar", "Edit", new { id = Model.bankId }, new {@class="btn btn-info btn-sm" }) 
+    
+</p>

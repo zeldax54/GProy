@@ -1,0 +1,148 @@
+﻿@model GProyOficial.Models.Project
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h3>Detalles</h3>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.name)-->Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.advancePercent)-->% de avance
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.advancePercent)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.startDate)-->Fecha de inicio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startDate)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.endDateEstimate)-->Fecha de fin estimado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endDateEstimate)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.totalContracted)-->Total contratado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalContracted)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.totalnvoiced)-->Total facturado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalnvoiced)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.toInvoiced)-->Por facturar
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.toInvoiced)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.modulequantity_)-->Cantidad de modulos
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modulequantity_)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.complexity)-->Complejidad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.complexity)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.plannedhours)-->Horas planificadas
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plannedhours)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.executedhours)-->Horas ejecutadas
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.executedhours)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.chronogramDeviation)-->Desviacion del cronograma
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chronogramDeviation)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.observation)-->Observacion
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observation)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.Area.name)-->Area
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area.name)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.Client.name)-->Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.name)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.Product.name)-->Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-success btn-sm" })
+
+    <a href="@Url.Action("Edit", "Projects", new { id = Model.projectId })" class="btn btn-info btn-sm">Editar</a>
+
+</p>

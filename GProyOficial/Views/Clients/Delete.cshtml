@@ -1,0 +1,284 @@
+﻿@model GProyOficial.Models.Client
+
+@{
+    ViewBag.Title = "Eliminar Registro";
+}
+
+
+
+<h3>Está seguro de que desea eliminar este registro?</h3>
+<div>
+<hr/>
+
+<div class="form-group">
+    <table style="width: 100%">
+        <tr>
+            <td>
+                <table class="form-group">
+                    <tr>
+                        <td style="width: 25%">
+                            @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.name)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.identifAbrev, "Abreviatura", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.identifAbrev)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.organismId, "Organismo", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.Organism.name)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.reup, "Código Reup", htmlAttributes: new {@class = "control-label col-md-2", style = "width: 150px ; text-align: left;"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.reup)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.legalPerson, "Personalidad Jurídica", htmlAttributes: new { @class = "control-label col-md-2", style = "width: 150px ; text-align: left;" })
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.CheckBoxFor(model => model.legalPerson, htmlAttributes: new { @disabled = "True" })
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <table class="form-group">
+                    <tr>
+                        <td style="width: 25%">
+                            @Html.LabelFor(model => model.agent, "Representante", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.agent)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.agentPosition, "Cargo Representante", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.agentPosition)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.telephone, "Teléfono", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.telephone)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.email, "Correo", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.email)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.dateCreation, "Día de Creación", htmlAttributes: new {@class = "control-label col-md-2"})
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                @Html.DisplayFor(model => model.dateCreation)
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-group" style="width: 30%"></div>
+
+<div class="form-group">
+    <table class="form-group">
+        <tr>
+            <td style="border-right: 1px solid #000000;">
+                <label class="control-label col-md-2">Dirección</label>
+            </td>
+            <td>
+                <table class="form-group">
+                    <tr>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.street)
+                        </div>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.city)
+                        </div>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.province)
+                        </div>
+                    </tr>
+                    <tr style="height: 8px"></tr>
+                    <tr>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.country)
+                        </div>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.isSubject, "Subordinada a alguna empresa?", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            <div class="checkbox" id="checkBoxSubject">
+                @Html.CheckBoxFor(model => model.isSubject, htmlAttributes: new {@id = "client_isSubject", @disabled = "True"})
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" id="checkBoxFather" style="display: none">
+        <label class="control-label col-md-2">Empresa</label>
+        <div class="col-md-10">
+            <select class="form-control valid" id="clientFather" name="clientFather" disabled="disabled">
+                @foreach (var item in ViewBag.fatherId)
+                {
+                    if (item.clientId == Model.fatherId)
+                    {
+                        <option value=@item.clientId selected="selected">@item.name</option>
+                    }
+                    else
+                    {
+                        <option value=@item.clientId>@item.name</option>
+                    }
+                }
+            </select>
+        </div>
+
+    </div>
+</div>
+<div>
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#home">Cuentas Bancarias</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+            <table class="table table-bordered" id="table">
+                <thead>
+                <tr>
+                    <th>
+                        Número de cuenta
+                    </th>
+                    <th>
+                        Nombre del banco
+                    </th>
+                    <th hidden="hidden">
+                        Id del banco
+                    </th>
+                    <th>
+                        Tipo de cuenta
+                    </th>
+                    <th hidden="hidden">
+                        Id de cuenta
+                    </th>
+                    <th>
+                        Nombre del propietario de la cuenta
+                    </th>
+                    <th style="width: 22px">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.AccountBank)
+                {
+                    <tr>
+                        <td>
+                            @item.accountNumber
+                        </td>
+                        <td>
+                            @item.Bank.name
+                        </td>
+                        <td hidden="hidden">
+                            @item.bankId
+                        </td>
+                        <td>
+                            @item.CurrencyType.type
+                        </td>
+                        <td hidden="hidden">
+                            @item.currencyTypeId
+                        </td>
+                        <td>
+                            @item.titular
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-sm" })
+        <input type="submit" value="Aceptar" class="btn btn-default btn-sm" /> 
+    </div>
+}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site.js")
+}

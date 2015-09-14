@@ -1,0 +1,293 @@
+﻿@using GProyOficial.Models
+@model GProyOficial.Models.Supplement
+
+@{
+    ViewBag.Title = "Nuevo Suplemento";
+}
+
+<h3>Nuevo Suplemento</h3>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.number,"Número", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contractId, "Contrato", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="number" name="contractId" value=@ViewBag.contractId id="contractId" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount, "Monto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.amount, new {  htmlAttributes = new { @class = "form-control", @id = "amountV", @disabled = "true" } })
+                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.signedProvider, "Firma del proveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.signedProvider, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.signedProvider, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.expirationDate, "Fecha de expiración", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.expirationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.expirationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.signedClient, "Firma del cliente", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.signedClient, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.signedClient, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.serviceId, "Servicio", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("serviceId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.serviceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("productId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.productId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-md-2">Estado</label>
+            <div class="col-md-10">
+                <select class="form-control valid" id="stateC" name="stateC" required="true">
+                    @foreach (var item in ViewBag.stateC)
+                    {
+                        <option value=@item.stateCId>@item.name</option>
+                    }
+                </select>
+                <input type="date" class="form-control" id="dateState" name="dateState" data-val="true" required="true" />
+                <textarea class="form-control" rows="3" id="descriptionState" name="descriptionState"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comitteNumber, "Número de acuerdo del comité", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comitteNumber, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.comitteNumber, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comitteDate, "Fecha del comité", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comitteDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comitteDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs" id="asig">Asignar</a>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Clientes <span class="badge" style="background: #fff; color: #428BCA" id="count"><input type="text" disabled="true" value="0" id="pass" style="background: #fff; width: 8px; border: 0;"/></span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="well well-sm">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="tableC">
+                            <thead>
+                            <tr>
+                                <th hidden="hidden">
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th hidden="hidden">
+                                    Teléfono
+                                </th>
+                                <th hidden="hidden">
+                                    Correo
+                                </th>
+                                <th>
+                                    Monto
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <input type="text" id="jsonClient" name="jsonClient" />
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-2">
+                @if (ViewBag.idclientValue)
+                {
+                    <input type="checkbox" checked="checked" value="true" name="idclient"/>
+                }
+                else
+                {
+                    <input type="checkbox" value="false" name="idclient" />
+                }
+            </div>
+            @Html.ActionLink("Cancelar", "Index", "Supplements", new { id = @ViewBag.contractId, idclient = @ViewBag.idclientValue }, new { @class = "btn btn-danger btn-sm" }) <input type="submit" value="Aceptar" class="btn btn-default btn-sm" />
+        </div>
+</div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Clientes</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-horizontal">
+                    <hr/>
+                    <div class="form-group">
+                        <table class="table" id="tableClient">
+                            <thead>
+                            <tr>
+                                <th hidden="hidden">
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                               <th>
+                                    Teléfono
+                                </th>
+                                <th>
+                                    Correo
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td hidden="hidden" class="clientId">
+                                        @ViewBag.clientFather.clientId
+                                    </td>
+                                    <td class="clientName">
+                                        @ViewBag.clientFather.name
+                                    </td>
+                                    <td class="telephone">
+                                        @ViewBag.clientFather.telephone
+                                    </td>
+                                    <td class="email">
+                                        @ViewBag.clientFather.email
+                                    </td>
+                                    <td>
+                                        <input type="image" src="../../Content/images/trash.png" class="sendClient">
+                                    </td>
+                                </tr>
+                            @foreach (var item in ViewBag.clients)
+                            {
+                                <tr>
+                                    <td hidden="hidden" class="clientId">
+                                        @item.clientId
+                                    </td>
+                                    <td class="clientName">
+                                        @item.name
+                                    </td>
+                                    <td class="telephone">
+                                        @item.telephone
+                                    </td>
+                                    <td class="email">
+                                        @item.email
+                                    </td>
+                                    <td>
+                                        <input type="image" src="../../Content/images/trash.png" class="sendClient">
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="create">Crear</button>
+                </div>
+            </div>
+            <!-- /.modal-body -->
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div>
+   
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site.js")
+}

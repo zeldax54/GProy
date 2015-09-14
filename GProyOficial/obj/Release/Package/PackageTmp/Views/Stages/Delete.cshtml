@@ -1,0 +1,49 @@
+﻿@model GProyOficial.Models.Stage
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+
+
+<h3>Esta seguro de que desea eliminar este registro?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.name)-->Etapa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.orden)-->Orden
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.orden)
+        </dd>
+
+        <dt>
+           <!-- @Html.DisplayNameFor(model => model.Service.name)-->Servicio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Service.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-sm" })
+            <input type="submit" value="Aceptar" class="btn btn-default" /> 
+           
+        </div>
+    }
+</div>

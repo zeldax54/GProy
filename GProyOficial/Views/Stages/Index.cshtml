@@ -1,0 +1,50 @@
+﻿@model IEnumerable<GProyOficial.Models.Stage>
+
+@{
+    ViewBag.Title = "Etapas";
+    var db = new GProyOficial.Models.GProyEntities();
+   
+}
+
+<h3>Etapas</h3>
+
+<p>
+        @Html.ActionLink("Crear", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.name)-->Etapa
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.orden)-->Orden
+        </th>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Service.name)-->Servicio
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.orden)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Service.name)
+        </td>
+        <td>
+            <!--@Html.ActionLink("Editar", "Edit", new { id=item.stageId })-->
+            <a href="@Url.Action("Edit", "Stages", new { id = item.stageId })" id="prueba"><img src="@Url.Content("~/Content/images/edit.png")" title="Editar" /> </a> |
+            <!--@Html.ActionLink("Detalles", "Details", new { id=item.stageId })-->
+            <a href="@Url.Action("Details", "Stages", new { id = item.stageId })" id="prueba"><img src="@Url.Content("~/Content/images/detail.png")" title="Detalles" /> </a>|
+            <!--@Html.ActionLink("Eliminar", "Delete", new { id=item.stageId })-->
+            <a href="@Url.Action("Delete", "Stages", new { id = item.stageId })" id="prueba"><img src="@Url.Content("~/Content/images/trash.png")" title="Eliminar" /> </a>
+        </td>
+    </tr>
+}
+
+</table>

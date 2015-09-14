@@ -1,0 +1,689 @@
+﻿@using System.Data.Entity
+@using System.Diagnostics.Eventing.Reader
+@using GProyOficial.Models
+@model GProyOficial.Models.Project
+
+@{
+    ViewBag.Title = "Editar";
+
+    int x = Model.projectId;
+    var dc = new GProyEntities();
+
+    var spec = dc.ProjSpecialist.Include("Specialist").Where(specialist => specialist.projectId == Model.projectId).ToList();
+    var areas = dc.Area.ToList();
+}
+
+<h3>Editar</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.projectId)
+        <input type="text" name="json" id="jsonid" value="" hidden="">
+        <input type="text" name="idpt" id="idpt" value="@Model.projectId" hidden="">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.areaId, "Area", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("areaId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.areaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.clientId, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("clientId", null, htmlAttributes: new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.clientId, "", new {@class = "text-danger"})
+            </div>
+            <input type="text" id="idclient" hidden="" value="@Model.clientId">
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.advancePercent, "% de avance", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.advancePercent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.advancePercent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.startDate, "Fecha de inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.startDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.endDateEstimate, "Fecha de fin estimado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.endDateEstimate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.endDateEstimate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.totalContracted, "Total contratado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.totalContracted, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.totalContracted, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.totalnvoiced, "Total facturado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.totalnvoiced, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.totalnvoiced, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.toInvoiced, "Por facturar", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.toInvoiced, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.toInvoiced, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("productId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.productId, "", new { @class = "text-danger" })
+                <input type="number" id="idprod" value=@ViewBag.idProduct />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.modulequantity_, "Cantidad de modulos", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.modulequantity_, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.modulequantity_, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.complexity, "Complejidad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.complexity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.complexity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.plannedhours, "Horas planificadas", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.plannedhours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.plannedhours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.executedhours, "Horas ejecutadas", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.executedhours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.executedhours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.chronogramDeviation, "Desviacion del cronograma", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.chronogramDeviation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.chronogramDeviation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.observation, "Observacion", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.observation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.observation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                 @Html.ActionLink("Cancelar", "Index", null, new { @class="btn btn-danger btn-sm"}) <input type="submit" value="Aceptar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td style="float:left">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs" id="asig">Asignar</a>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                Especialistas <span class="badge" style="background:#fff;color:#428BCA" id="cont">@spec.Count</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="well well-sm">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:15%">
+                                                Area
+                                            </th>
+                                            <th>
+                                                ID
+                                            </th>
+                                            <th>
+                                                Especialista
+                                            </th>
+                                            <th style="width:50px">
+                                                Jefe del Proyecto
+                                            </th>
+                                            <th style="width:50px">
+
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+    foreach (var specialistp in spec)
+    {
+      
+                                           
+        <tr>
+            <td><span id="area">@specialistp.Specialist.Area.name</span></td>
+            <td><span id="id">@specialistp.specialistId</span></td>
+            <td><span id="nomb">@specialistp.Specialist.name</span></td>
+            <td>
+                @if (specialistp.boss)
+                {
+                    <button type="button" class="btn btn-default btn-sm" id="sel" style="background: #00bfff">
+
+                        <span class="glyphicon glyphicon-user" ></span>
+                    </button>
+                }
+                @if (specialistp.boss == false)
+                {
+                    <button type="button" class="btn btn-default btn-sm" id="sel">
+
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                }
+                
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-default btn-sm" id="deleteRow">
+                    <span class="glyphicon glyphicon-remove-sign"></span>
+                </button>
+            </td>
+
+        </tr>
+    }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+            <td style="float: left">
+                <div class="panel panel-primary" style="float: left">
+                    @{
+                        var sups = dc.ProjSup.Include("Supplement").Where(project => project.projectId == Model.projectId).ToList();
+                    }
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                Cronogramas.  <span class="badge" style="background:#fff;color:#428BCA">@sups.Count</span> Suplementos Asignados
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="well well-sm">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="table">
+
+                                    <tbody>
+
+                                        @if (sups.Count == 0)
+                                        {
+
+                                            <div class="alert-warning">
+                                                <h4>No hay Suplementos asociados a este proyecto</h4>
+                                            </div>
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+                                            <tr>
+                                                <th style="width: 15%">
+                                                    ID
+                                                </th>
+                                                <th style="width: 50%">
+                                                    Suplemento
+                                                </th>
+                                                <th style="width: 50%">
+                                                    Monto
+                                                </th>
+                                                <th style="width: 50%">
+                                                    Servicio
+                                                </th>
+                                                <th style="width: 50%">
+                                                    Id Serv
+                                                </th>
+                                                <th style="width: 50%">
+                                                    Id ProjSup
+                                                </th>
+
+                                            </tr>
+                                      
+                                            foreach (var s in sups)
+                                            {
+                                                <tr>
+                                                    <td><span id="supid">@s.Supplement.supplementId</span></td>
+                                                    <td><span id="supname">@s.Supplement.name</span></td>
+                                                    <td><span id="monto">@s.Supplement.amount</span></td>
+                                                    <td><span id="servname">@s.Supplement.Service.name</span></td>
+                                                    <td><span id="sid">@s.Supplement.serviceId</span></td>
+                                                    <td><span id="projsupid">@s.projSupId</span></td>
+                                                    <td><a data-toggle="modal" class="btn btn-success btn-xs" id="crono">Cronograma</a></td>
+                                                </tr>
+                                            }
+
+                                        }
+                                   
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!-- Modal asignar especialistas -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#@areas[0].name">@areas[0].name</a></li>
+                            @for (var i = 1; i < areas.Count; i++)
+                            {
+                                <li><a href="#@areas[i].name">@areas[i].name</a></li>
+                            }
+
+
+                        </ul>
+
+                        <div class="tab-content">
+                            <!--Contenido Primer tab-->
+                            <div class="tab-pane active" id="@areas[0].name">
+                                @{
+
+                            var specialist = dc.Specialist.SqlQuery("Select * from Specialist where areaId=" + @areas[0].areaId).ToList();
+                            foreach (ProjSpecialist t in spec)
+                            {
+                                for (int j = 0; j < specialist.Count; j++)
+                                {
+                                    if (t.specialistId == specialist[j].specialistId)
+                                    {
+                                        specialist.RemoveAt(j);
+                                        break;
+                                    }
+
+                                }
+                            }
+                            var grid = new WebGrid(specialist, canPage: true, rowsPerPage: 100);
+                            grid.Pager(WebGridPagerModes.All);
+                                }
+                                <div id="@areas[0].name">
+                                    @grid.GetHtml(
+
+                    tableStyle: "webgrid-table",
+                    headerStyle: "webgrid-header",
+                    footerStyle: "webgrid-footer",
+                    alternatingRowStyle: "webgrid-alternating-row",
+                    rowStyle: "webgrid-row-style",
+                    columns: grid.Columns(
+                         grid.Column("", format: @<text>
+                        <button type="button" class="btn btn-default btn-lg" id="Asignar">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </button>
+                        </text>, style: "width:100px", canSort: false),
+                        grid.Column("name","Area",@<text> <span id="area">@areas[0].name</span></text>),
+                        grid.Column("specialistId","ID",@<text> <span id="id">@item.specialistId</span></text>),
+                        grid.Column("name", "Nombre",@<text> <span id="nomb">@item.name</span></text>)
+
+
+           ))
+                                </div>
+
+
+
+                            </div>
+                            @for (var i = 1; i < areas.Count; i++)
+                            {
+            <!--Ciclo para crear demas areas y especialistas-->
+                                var specialist1 = dc.Specialist.SqlQuery("Select * from Specialist where areaId=" + @areas[i].areaId).ToList();
+                                foreach (ProjSpecialist t in spec)
+                                {
+                                    for (int j = 0; j < specialist1.Count; j++)
+                                    {
+                                        if (t.specialistId == specialist1[j].specialistId)
+                                        {
+                                            specialist1.RemoveAt(j);
+                                            break;
+                                        }
+
+                                    }
+                                }
+                                var grid1 = new WebGrid(specialist1, canPage: true, rowsPerPage: 100);
+                                grid.Pager(WebGridPagerModes.All);
+
+                                <div class="tab-pane" id="@areas[i].name">
+                                    <div id="@areas[i].name">
+                                        @grid1.GetHtml(
+
+                        tableStyle: "webgrid-table",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        rowStyle: "webgrid-row-style",
+                        columns: grid1.Columns(
+                            grid1.Column("", format: @<text>
+                            <button type="button" class="btn btn-default btn-lg" id="Asignar">
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                            </button>
+
+
+                            </text>, style: "width:100px", canSort: false),
+                        grid1.Column("name","Area",@<text> <span id="area">@areas[i].name</span></text>),
+                        grid1.Column("specialistId","ID",@<text> <span id="id">@item.specialistId</span></text>),
+                        grid1.Column("name", "Nombre",@<text> <span id="nomb">@item.name</span></text>)
+
+
+
+             ))
+                                    </div>
+
+
+
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Modal Suplementos Cronogramas -->
+        <div class="modal fade" id="modalsup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <span id="titcron">Cronograma</span>
+                        <br>
+                        <span>Por Asignar-></span><span id="quedan" class="label-primary"></span>
+                        <br>
+                        <span>PSID</span><span id="psid" class="label-primary"></span>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning" id="alerta">Nuevo Cronograma</div>
+                        <div class="alert alert-success" id="alertad" hidden="">Cronograma Definido</div>
+                        <div class="alert alert-warning" id="alertaerror" hidden="">Este cronograma tiene especialistas asignados y no se puede editar</div>
+                        <table id="tablacron">
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Fase
+                                </th>
+                                <th>
+                                    Dias
+                                </th>
+                                <th>
+                                    Monto
+                                </th>
+                            </tr>
+                            <tbody></tbody>
+                        </table>
+                        <div style="text-align: center;"><button type="button" class="btn btn-success btn-xs" id="savecron">Salvar Cronograma</button></div>
+                    </div>
+                </div>
+              
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/Site.js")
+    <script type="text/javascript">
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+
+
+        });
+
+
+    </script>
+}
+
+<!-- Modal Detalles de las Fases -->
+<div class="modal fade" id="detallefase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <table id="tabdetfase" class="webgrid-table">
+                    <tr>
+
+                        <th>
+                            IDDetalle
+                        </th>
+                        <th hidden="">
+                            IDFase
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Total Contratado
+                        </th>
+                        <th>
+                            Total Facturado
+                        </th>
+                        <th>
+                            Por Facturar
+                        </th>
+                        <th>
+
+                        </th>
+
+                    </tr>
+                    <tbody></tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+
+<!-- Modal Asignar especialistas a las fases -->
+<div class="modal fade" id="modalspec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label class="label-primary">Especialistas posibles para la fase :</label> <span id="nombfase"> Nombre Fase</span>
+                <br>
+                <span id="detalleact" hidden=""> Nombre Fase</span>
+                <br>
+                <span id="porciq" hidden=""></span>
+                <table id="tablaesp" class="webgrid-table">
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            Area
+                        </th>
+                        <th hidden="">
+                            ID
+                        </th>
+                        <th>
+                            Especialista
+                        </th>
+                        <th>
+                            Jefe de Proyecto
+                        </th>
+                    </tr>
+                    <tbody></tbody>
+                </table>
+                <div style="text-align: center; height: 30px"></div>
+                <label class="label-success">Asingados</label>
+                <table id="tablaespfase" class="webgrid-table">
+                    <tr>
+                        
+                        <th>
+                            Area
+                        </th>
+                        <th>
+                            ID_Det
+                        </th>
+                        <th>
+                            Especialista
+                        </th>
+                        <th>
+                            %Participacion
+                        </th>
+                    </tr>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+     
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+
+
+<!-- Modal Mensaje usos(eliminar especialista,asignar especialistas a fase de un proyecto) -->
+<div class="modal fade" id="modalmsj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+                <span id="lbmjs"class="label-info"></span>
+                <br>
+                <span id="prestm"></span>
+                <table id="tablamsj" class="webgrid-table">
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            Area
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Especialista
+                        </th>
+                        <th>
+                            Jefe de Proyecto
+                        </th>
+                    </tr>
+                    <tbody></tbody>
+                </table>
+               
+           
+            </div>
+        </div>
+       
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+<!-- Modal facturacion 1 -->
+<div class="modal fade" id="modalfact1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+
+            </div>
+            <div class="modal-body">
+
+                <table id="tablacreatefact">
+                    </table>
+</div>
+        </div>
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
