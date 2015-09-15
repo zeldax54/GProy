@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -24,19 +24,18 @@ namespace GProyOficial.Controllers
             spList.ContractId = id;
             Contract contract = db.Contract.Find(id);
             ViewBag.nombc = contract.Client.name;
+            ViewBag.clieteid = contract.Client.clientId;
+            ViewBag.contrato = contract.number;
             if (contract != null && idclient)
             {
                 spList.IsClient = true;
                 spList.ClientId = contract.clientId;
-               
             }
             else
             {
                 spList.IsClient = false;
             }
-
             
-            //supplement.ToList()
             return View(spList);
         }
 
@@ -138,6 +137,8 @@ namespace GProyOficial.Controllers
         {
             if (ModelState.IsValid)
             {
+                supplement.nom1 = "tmpvalue";
+                supplement.nom2 = "tmpvalue";
                 StateCSupplement _stateCSupplement = new StateCSupplement
                 {
                     stateCId = stateC,

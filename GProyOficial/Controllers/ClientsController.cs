@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -119,6 +119,7 @@ namespace GProyOficial.Controllers
         {
            if (ModelState.IsValid)
            {
+               
                ICollection<AccountBank> accountBanks = SetJson(jsonData);
                if (accountBanks.Count > 0)
                {

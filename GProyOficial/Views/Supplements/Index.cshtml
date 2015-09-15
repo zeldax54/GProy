@@ -1,4 +1,4 @@
-﻿@using GProyOficial.Models
+@using GProyOficial.Models
 @model GProyOficial.Models.ViewModel.SupplementList
 
 @{
@@ -20,7 +20,7 @@
 
 }
 
-<h4>Suplementos Cliente: @ViewBag.nombc Contrato No: @Model.Supplements.First().Contract.number</h4>
+<h4>Suplementos Cliente: @ViewBag.nombc Contrato No: @ViewBag.contrato</h4>
 
 @{
     Contract c = dc.Contract.Find(Model.ContractId);
@@ -151,7 +151,7 @@ else
     </tbody>
 </table>
 
-@(Html.ActionLink("Volver", "Index", "ClientContract", new {id = Model.Supplements.First().Contract.Client.clientId}, new {@class = "btn btn-success btn-sm"}))
+@(Html.ActionLink("Volver", "Index", "ClientContract", new { id = @ViewBag.clieteid }, new { @class = "btn btn-success btn-sm" }))
 
         @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

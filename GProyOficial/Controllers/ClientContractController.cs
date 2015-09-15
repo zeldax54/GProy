@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -72,7 +72,8 @@ namespace GProyOficial.Controllers
                     state = true
                 };
                 db.StateContract.Add(_stateContract);
-
+                contract.nom1 = "tempvalue";
+                contract.nom2 = "tmpvalue";
                 contract.clientId = idClient;
                 db.Contract.Add(contract);
                 db.SaveChanges();
